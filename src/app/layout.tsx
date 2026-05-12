@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
+import { Barlow } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
+import { Navbar } from "@/components/navbar/Navbar";
 import { siteConfig } from "@/config/site";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
+
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-barlow",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,15 +37,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className={barlow.variable} lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         />
       </head>
-      <body>
-        <Header />
+      <body suppressHydrationWarning>
+        <Navbar />
         <main>{children}</main>
         <Footer />
       </body>

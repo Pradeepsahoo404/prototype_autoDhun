@@ -67,6 +67,7 @@ function FooterNewsletter() {
             Enter your email
           </label>
           <input
+            suppressHydrationWarning
             className="footer-newsletter-input"
             id="footer-email"
             name="email"
@@ -74,7 +75,7 @@ function FooterNewsletter() {
             type="email"
             autoComplete="email"
           />
-          <button className="footer-newsletter-button" type="submit">
+          <button suppressHydrationWarning className="footer-newsletter-button" type="submit">
             Subscribe
           </button>
         </form>

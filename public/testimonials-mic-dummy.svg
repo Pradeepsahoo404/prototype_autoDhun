@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="480" viewBox="0 0 400 480" fill="none">
+  <defs>
+    <linearGradient id="g" x1="200" y1="0" x2="200" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#84EB0C" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#B8FF4A" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#6BC80A" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="80" y1="160" x2="320" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#141414"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="480" rx="24" fill="#050505"/>
+  <rect x="24" y="24" width="352" height="432" rx="18" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
+  <!-- mic silhouette -->
+  <path d="M200 48v72M152 88h96M200 120v36" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="200" cy="210" r="56" stroke="url(#g)" stroke-width="4" fill="#101010"/>
+  <rect x="132" y="168" width="136" height="96" rx="12" fill="url(#panel)" stroke="url(#g)" stroke-width="3"/>
+  <!-- placeholder label -->
+  <text x="200" y="222" text-anchor="middle" fill="#84EB0C" fill-opacity="0.55" font-family="system-ui,sans-serif" font-size="14" font-weight="600">DUMMY IMAGE</text>
+  <path d="M148 232h104M148 246h104M148 260h104" stroke="#f5f5f5" stroke-opacity="0.35" stroke-width="4" stroke-linecap="round"/>
+  <path d="M200 288v56M160 360h80M140 392c0-14 12-26 26-26h68c14 0 26 12 26 26" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 220h48M320 220h48M40 280h36M324 280h36" stroke="url(#g)" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"/>
+</svg>
