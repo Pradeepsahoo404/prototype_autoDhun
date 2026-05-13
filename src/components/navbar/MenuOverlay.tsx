@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
-import { mainNavigation } from "@/components/navbar/menuData";
+import { mainNavigation, type NavMenuEntry } from "@/components/navbar/menuData";
 import { MenuItem } from "@/components/navbar/MenuItem";
 import { PreviewPanel } from "@/components/navbar/PreviewPanel";
 
@@ -25,6 +25,13 @@ function isRouteActive(pathname: string, href: string) {
     return pathname === "/";
   }
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function isNavEntryActive(pathname: string, item: NavMenuEntry) {
+  if (isRouteActive(pathname, item.href)) {
+    return true;
+  }
+  return item.submenu?.some((sub) => isRouteActive(pathname, sub.href)) ?? false;
 }
 
 const MOBILE_NAV_MQ = "(max-width: 1023px)";
@@ -58,11 +65,17 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
     getMobileNavServerSnapshot
   );
 
+  /** Collapse mobile accordion when viewport leaves mobile; avoid sync setState in effect (react-hooks/set-state-in-effect). */
   useEffect(() => {
-    if (!accordionMode) {
-      setMobileExpandedId(null);
-    }
-  }, [accordionMode]);
+    const mq = window.matchMedia(MOBILE_NAV_MQ);
+    const clearIfDesktop = () => {
+      if (!mq.matches) {
+        setMobileExpandedId(null);
+      }
+    };
+    mq.addEventListener("change", clearIfDesktop);
+    return () => mq.removeEventListener("change", clearIfDesktop);
+  }, []);
 
   const hoveredEntry = useMemo(() => {
     const match = mainNavigation.find((item) => item.id === hoveredId);
@@ -75,21 +88,21 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
   const submenu = hoveredEntry?.submenu;
 
   const navInner = (
-    <div className="flex h-full w-full flex-col gap-8 text-white sm:gap-10 lg:flex-row lg:items-start lg:gap-0 lg:pl-0 lg:pr-0">
+    <div className="flex h-full min-h-0 w-full flex-col gap-8 text-white sm:gap-10 lg:flex-row lg:items-start lg:gap-0 lg:overflow-hidden lg:pl-0 lg:pr-0">
       <nav
         aria-labelledby={`${listId}-label`}
-        className="w-full min-w-0 shrink-0 lg:flex-[0_0_280px] lg:pl-8 lg:pt-10 xl:flex-[0_0_336px] xl:pl-16 xl:pt-[52px]"
+        className="w-full min-w-0 shrink-0 lg:flex lg:h-full lg:min-h-0 lg:flex-col lg:overflow-hidden lg:flex-[0_0_280px] lg:pl-8 lg:pt-5 xl:flex-[0_0_336px] xl:pl-16 xl:pt-6"
       >
         <p className="sr-only" id={`${listId}-label`}>
           Primary pages
         </p>
-        <ul className="m-0 flex list-none flex-col gap-0 p-0">
+        <ul className="m-0 flex min-h-0 list-none flex-col gap-0 p-0 lg:max-h-full lg:flex-1 lg:justify-between lg:overflow-hidden lg:py-1">
           {mainNavigation.map((item, index) => (
             <MenuItem
               accordionMode={accordionMode}
               index={index}
               isHighlighted={hoveredId === item.id}
-              isRouteActive={isRouteActive(pathname, item.href)}
+              isRouteActive={isNavEntryActive(pathname, item)}
               isSubRouteActive={(href) => isRouteActive(pathname, href)}
               item={item}
               key={item.id}
@@ -106,16 +119,16 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
         </ul>
       </nav>
 
-      <div className="relative z-[1] hidden min-h-[100px] w-full min-w-0 shrink-0 flex-col justify-center pt-6 sm:pt-8 lg:!flex lg:min-h-0 lg:flex-[0_0_300px] lg:pl-8 lg:pt-10 xl:flex-[0_0_440px] xl:pl-16 xl:pt-[52px]">
+      <div className="relative z-[1] hidden min-h-[100px] w-full min-w-0 shrink-0 flex-col justify-start pt-6 sm:pt-8 lg:!flex lg:min-h-0 lg:flex-[0_0_300px] lg:overflow-hidden lg:pl-8 lg:pt-5 xl:flex-[0_0_440px] xl:pl-16 xl:pt-6">
         {submenu?.length && hoveredEntry ? (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-1"
+            className="flex flex-col gap-1 lg:gap-0"
             initial={false}
             key={hoveredEntry.id}
             transition={{ duration: reduceMotion ? 0.12 : 0.4, ease: easeLux }}
           >
-            <p className="nav-menu-submenu-heading mb-2 text-white/60">{hoveredEntry.title}</p>
+            <p className="nav-menu-submenu-heading mb-1 text-white/60 lg:mb-0.5">{hoveredEntry.title}</p>
             <ul className="m-0 flex list-none flex-col gap-0 p-0">
               {submenu.map((sub) => {
                 const subActive = isRouteActive(pathname, sub.href);
@@ -144,7 +157,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
                       <motion.span
                         animate={{ x: reduceMotion ? 0 : subActive ? 4 : 0 }}
                         className={cn(
-                          "relative inline-flex min-h-[48px] w-full items-center transition-colors duration-500 ease-out",
+                          "relative inline-flex min-h-[48px] w-full items-center transition-colors duration-500 ease-out lg:min-h-[34px]",
                           subLit
                             ? "text-[var(--color-primary)]"
                             : "text-white/70 group-hover:text-[var(--color-primary)]"
@@ -170,7 +183,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
                         }}
                         animate={subLit ? "on" : "rest"}
                       >
-                        <ChevronRight className="size-5 shrink-0" strokeWidth={1.15} />
+                        <ChevronRight className="size-5 shrink-0 lg:size-4" strokeWidth={1.15} />
                       </motion.span>
                     </Link>
                   </li>
@@ -190,7 +203,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
       animate={{ opacity: 1, x: 0, y: 0 }}
       aria-label="Site navigation"
       aria-modal="true"
-      className="relative z-[52] flex min-h-0 w-full flex-1 flex-col overflow-x-hidden overflow-y-auto bg-black lg:absolute lg:left-0 lg:top-[var(--site-header-height)] lg:min-h-[640px] lg:h-[80vh] lg:w-[100vw] lg:overflow-x-hidden lg:overflow-y-auto"
+      className="relative z-[52] flex min-h-0 w-full flex-1 flex-col overflow-x-hidden overflow-y-auto bg-black lg:absolute lg:left-0 lg:top-[var(--site-header-height)] lg:h-[calc(100svh-var(--site-header-height))] lg:max-h-[calc(100svh-var(--site-header-height))] lg:w-[100vw] lg:overflow-x-hidden lg:overflow-y-hidden"
       exit={{ opacity: 0, x: reduceMotion ? 0 : -28, y: reduceMotion ? 0 : -14 }}
       id={id}
       initial={{ opacity: 0, x: reduceMotion ? 0 : -32, y: reduceMotion ? 0 : -18 }}
@@ -206,8 +219,8 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
       />
 
       {/* One shell: explicit min-height on lg so absolute layers get height (fixes collapsed layout) */}
-      <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:min-h-[calc(100svh-var(--site-header-height))] lg:flex-1">
-        <div className="relative flex min-h-0 flex-1 flex-col lg:min-h-0">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:h-full lg:min-h-0 lg:max-h-full lg:flex-1 lg:overflow-hidden">
+        <div className="relative flex min-h-0 flex-1 flex-col lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden">
           {/* Hero: full viewport behind menu; Virgin-style diagonal revealed by white clipped panel */}
           <div className="relative z-0 order-2 min-h-[min(48vh,380px)] flex-1 lg:absolute lg:inset-0 lg:order-1 lg:z-0 lg:min-h-0">
             <PreviewPanel active={activePreview} fullBleed />
@@ -215,7 +228,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
 
           <aside
             className={cn(
-              "relative z-20 order-1 border-b border-white/10 bg-[#0b0b0b] px-4 pb-10 pt-8 text-white shadow-sm sm:px-6 sm:pb-12 sm:pt-10 lg:absolute lg:inset-y-0 lg:left-0 lg:order-2 lg:z-20 lg:h-full lg:w-full lg:border-0 lg:px-0 lg:pb-0 lg:pt-0 lg:shadow-none lg:[clip-path:polygon(0_0,76vw_0,58vw_100%,0_100%)]"
+              "relative z-20 order-1 border-b border-white/10 bg-[#0b0b0b] px-4 pb-10 pt-8 text-white shadow-sm sm:px-6 sm:pb-12 sm:pt-10 lg:absolute lg:inset-y-0 lg:left-0 lg:order-2 lg:z-20 lg:h-full lg:max-h-full lg:w-full lg:overflow-hidden lg:border-0 lg:px-0 lg:pb-0 lg:pt-0 lg:shadow-none lg:[clip-path:polygon(0_0,76vw_0,58vw_100%,0_100%)]"
             )}
             onPointerLeave={(event) => {
               // Desktop: nav + submenu share this aside; clearing here breaks side-by-side hover.

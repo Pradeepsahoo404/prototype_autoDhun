@@ -113,9 +113,6 @@ function SliderToMicConnector({ className }: { className?: string }) {
   );
 }
 
-/** Local placeholder — swap for final art when ready */
-const TESTIMONIALS_DUMMY_SRC = "./testimonials-mic-dummy.svg";
-
 /** Right column: single dummy graphic, lemon frame (matches section style) */
 function TestimonialsRightFigure({ showConnector }: { showConnector: boolean }) {
   return (

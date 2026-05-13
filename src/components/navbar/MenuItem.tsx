@@ -51,7 +51,7 @@ export function MenuItem({
     "nav-menu-primary group relative flex w-full max-w-[min(100%,336px)] items-center py-0 pr-12 text-left sm:pr-16 sm:whitespace-nowrap";
 
   const titleClass = cn(
-    "relative inline-flex min-h-[56px] w-full min-w-0 max-w-[280px] items-center transition-colors duration-500 ease-out sm:min-h-[72px] sm:whitespace-nowrap",
+    "relative inline-flex min-h-[56px] w-full min-w-0 max-w-[280px] items-center transition-colors duration-500 ease-out sm:min-h-[72px] sm:whitespace-nowrap lg:min-h-0 lg:shrink-0",
     titleGreen
       ? "text-[var(--color-primary)]"
       : "text-white group-hover:text-[var(--color-primary)]"
@@ -62,7 +62,7 @@ export function MenuItem({
   return (
     <motion.li
       animate={{ opacity: 1, y: 0 }}
-      className="relative list-none"
+      className="relative list-none lg:shrink-0"
       initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }}
       transition={{
         delay: reduceMotion ? 0 : 0.06 + index * 0.085,
@@ -123,7 +123,7 @@ export function MenuItem({
               }}
               animate={arrowOn ? "on" : "rest"}
             >
-              <ChevronRight className="size-6 shrink-0 sm:size-7" strokeWidth={1.15} />
+              <ChevronRight className="size-6 shrink-0 sm:size-7 lg:size-5" strokeWidth={1.15} />
             </motion.span>
           </button>
         ) : (
@@ -158,7 +158,7 @@ export function MenuItem({
               }}
               animate={arrowOn ? "on" : "rest"}
             >
-              <ChevronRight className="size-6 shrink-0 sm:size-7" strokeWidth={1.15} />
+              <ChevronRight className="size-6 shrink-0 sm:size-7 lg:size-5" strokeWidth={1.15} />
             </motion.span>
           </Link>
         )}
