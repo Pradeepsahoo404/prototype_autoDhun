@@ -1,4 +1,4 @@
-import type { ForArtistsBenefitsContent } from "@/data/solutions/for-artists";
+import type { GrowthMarketingToolsBenefitsContent } from "@/data/growth/marketing-tools";
 
 import { FadeUp } from "@/components/services/fade-up";
 import {
@@ -9,12 +9,12 @@ import {
 } from "@/components/services/service-benefits-shared";
 import { cn } from "@/lib/utils";
 
-export function ForArtistsBenefitsSection({
+export function GrowthMarketingToolsBenefitsSection({
   content,
   className,
   hideTopRule = false
 }: {
-  content: ForArtistsBenefitsContent;
+  content: GrowthMarketingToolsBenefitsContent;
   className?: string;
   hideTopRule?: boolean;
 }) {
@@ -34,7 +34,7 @@ export function ForArtistsBenefitsSection({
       <div className="faq-container relative z-[1]">
         <FadeUp>
           <ServiceBenefitsSectionHeader
-            headingId="for-artists-benefits-heading"
+            headingId="growth-marketing-tools-benefits-heading"
             titleLine1={content.sectionTitleLine1}
             titleLine2={content.sectionTitleLine2}
           />

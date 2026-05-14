@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
@@ -14,6 +14,13 @@ const barlow = Barlow({
   variable: "--font-barlow",
   display: "swap"
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover"
+};
 
 export const metadata: Metadata = {
   title: {
@@ -46,7 +53,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <Navbar />
-        <main>{children}</main>
+        <main className="min-w-0 max-w-[100vw] overflow-x-clip">{children}</main>
         <Footer />
       </body>
     </html>

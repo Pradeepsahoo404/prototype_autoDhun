@@ -1,9 +1,10 @@
 type Props = {
-  params: { path?: string[] };
+  params: Promise<{ path?: string[] }>;
 };
 
-export default function AboutSubPage({ params }: Props) {
-  const slug = params.path?.join("/") ?? "";
+export default async function AboutSubPage({ params }: Props) {
+  const { path } = await params;
+  const slug = path?.join("/") ?? "";
   return (
     <main style={{ padding: 24 }}>
       <h1 style={{ fontSize: 32, fontWeight: 700 }}>About</h1>

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/ensure-dev-routes-manifest.cjs && next dev --webpack",
+    "dev:turbo": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -15,7 +16,7 @@
     "@fortawesome/fontawesome-free": "^7.2.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "1.14.0",
-    "next": "16.2.5",
+    "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
@@ -25,7 +26,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
-    "eslint-config-next": "16.2.5",
+    "eslint-config-next": "16.2.6",
     "postcss": "latest",
     "prettier": "latest",
     "tailwindcss": "4.2.4",

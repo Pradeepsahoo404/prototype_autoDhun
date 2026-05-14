@@ -91,8 +91,8 @@ export const mainNavigation: NavMenuEntry[] = [
     description: "Marketing, promotion, and funding to grow your reach.",
     submenu: [
       { title: "Marketing Tools", href: "/growth/marketing-tools" },
-      { title: "Music Marketing", href: "/growth/music-marketing" },
-      { title: "Artist Funding", href: "/growth/artist-funding" }
+      { title: "Artist Funding", href: "/growth/artist-funding" },
+      { title: "Music Marketing", href: "/growth/music-marketing" }
     ]
   },
   {

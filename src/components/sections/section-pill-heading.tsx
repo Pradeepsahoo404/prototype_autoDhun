@@ -16,20 +16,20 @@ const bandGlowStyle = {
 };
 
 /** Short tick + gradient line extending to the right (after the pill in reading order). */
-function PillRightStroke() {
+function PillRightStroke({ className }: { className?: string }) {
   return (
-    <div className="relative z-[1] flex min-h-[1px] min-w-0 flex-1 items-center pl-2 sm:pl-3" aria-hidden>
+    <div className={cn("relative z-[1] flex min-h-[1px] min-w-0 flex-1 items-center pl-2 sm:pl-3", className)} aria-hidden>
       <span className="h-px w-8 shrink-0 bg-white/20 sm:w-10" />
-      <span className="h-px min-w-[2rem] flex-1 max-w-[12rem] bg-gradient-to-r from-[rgba(167,139,250,0.85)] via-[rgba(139,92,246,0.45)] to-transparent sm:max-w-[16rem]" />
+      <span className="h-px min-w-[1.25rem] flex-1 max-w-[6rem] bg-gradient-to-r from-[rgba(167,139,250,0.85)] via-[rgba(139,92,246,0.45)] to-transparent sm:min-w-[2rem] sm:max-w-[12rem] md:max-w-[16rem]" />
     </div>
   );
 }
 
 /** Mirror of `PillRightStroke` for the left side of a centered pill (band variant). */
-function PillLeftStroke() {
+function PillLeftStroke({ className }: { className?: string }) {
   return (
-    <div className="relative z-[1] flex min-h-[1px] min-w-0 flex-1 items-center justify-end pr-2 sm:pr-3" aria-hidden>
-      <span className="h-px min-w-[2rem] flex-1 max-w-[12rem] bg-gradient-to-r from-transparent via-[rgba(139,92,246,0.45)] to-[rgba(167,139,250,0.85)] sm:max-w-[16rem]" />
+    <div className={cn("relative z-[1] flex min-h-[1px] min-w-0 flex-1 items-center justify-end pr-2 sm:pr-3", className)} aria-hidden>
+      <span className="h-px min-w-[1.25rem] flex-1 max-w-[6rem] bg-gradient-to-r from-transparent via-[rgba(139,92,246,0.45)] to-[rgba(167,139,250,0.85)] sm:min-w-[2rem] sm:max-w-[12rem] md:max-w-[16rem]" />
       <span className="h-px w-8 shrink-0 bg-white/20 sm:w-10" />
     </div>
   );
@@ -37,7 +37,10 @@ function PillLeftStroke() {
 
 export type SectionPillHeadingProps = {
   heading: string;
+  /** Merged onto the outer wrapper (`band` = section, `inline` = root). */
   className?: string;
+  /** Merged onto the pill label (`<p>`) — use for per-section type scale (e.g. slightly smaller title). */
+  pillClassName?: string;
   as?: "section" | "div";
   /**
    * `band` — full-width black band + centered pill with accent strokes on both sides.
@@ -49,6 +52,7 @@ export type SectionPillHeadingProps = {
 export function SectionPillHeading({
   heading,
   className,
+  pillClassName,
   as: Root = "section",
   variant = "band",
 }: SectionPillHeadingProps) {
@@ -56,19 +60,20 @@ export function SectionPillHeading({
 
   const bandPillClasses = cn(
     "releases-title-badge relative z-10",
-    "inline-block rounded-[12px] border border-white/[0.08] bg-[#0a0a0a] px-10 py-3.5 text-center sm:px-12 sm:py-4",
-    "text-[20px] font-bold uppercase tracking-[1px] text-white sm:text-[22px]",
+    "inline-block max-w-full min-w-0 rounded-[12px] border border-white/[0.08] bg-[#0a0a0a] px-4 py-3 text-center sm:px-10 sm:py-3.5 md:px-12 md:py-4",
+    "text-[clamp(0.875rem,2.8vw+0.35rem,1.375rem)] font-bold uppercase tracking-[0.06em] text-white sm:tracking-[1px] sm:text-[22px]",
+    "break-words text-balance [overflow-wrap:anywhere]",
     "shadow-[0_10px_30px_rgba(139,92,246,0.28),inset_0_1px_0_rgba(255,255,255,0.08)]"
   );
 
   const pillBlock = (
-    <div className="relative inline-flex shrink-0 flex-col items-center">
+    <div className="relative inline-flex min-w-0 max-w-full shrink-0 flex-col items-center">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-[calc(100%-8px)] z-0 h-[110px] w-[min(100vw,340px)] max-w-[340px] -translate-x-1/2"
         style={bandGlowStyle}
       />
-      <p id={labelId} className={bandPillClasses}>
+      <p id={labelId} className={cn(bandPillClasses, pillClassName)}>
         {heading}
       </p>
     </div>
@@ -77,7 +82,7 @@ export function SectionPillHeading({
   if (variant === "inline") {
     return (
       <Root aria-labelledby={Root === "section" ? labelId : undefined} className={cn("w-full", className)}>
-        <div className="relative flex w-full max-w-full flex-nowrap items-center gap-0">
+        <div className="relative flex w-full min-w-0 max-w-full flex-nowrap items-center gap-0">
           {pillBlock}
           <PillRightStroke />
         </div>
@@ -89,11 +94,11 @@ export function SectionPillHeading({
     <Root
       aria-labelledby={Root === "section" ? labelId : undefined}
       className={cn(
-        "releases-title-wrapper relative flex justify-center bg-black px-4 pb-20 pt-12 sm:pb-28 sm:pt-16",
+        "releases-title-wrapper relative flex min-w-0 max-w-full justify-center bg-black px-3 pb-20 pt-12 sm:px-4 sm:pb-28 sm:pt-16",
         className
       )}
     >
-      <div className="relative flex w-full max-w-full flex-nowrap items-center justify-center gap-0">
+      <div className="relative flex w-full min-w-0 max-w-full flex-nowrap items-center justify-center gap-0">
         <PillLeftStroke />
         {pillBlock}
         <PillRightStroke />

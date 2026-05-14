@@ -2,16 +2,12 @@ import Image from "next/image";
 
 import { Mail, MapPin, Phone } from "lucide-react";
 
-const ecosystemLinks = [
-  "Audience Intelligence",
-  "Artist Ecosystem",
-  "Label Infrastructure",
-  "Rights & Publishing",
-  "Auxy Studio",
-  "Creative Sync",
-  "Licensing Exchange",
-  "Growth & Marketing",
-  "Artist Capital"
+type FooterColumnLink = string | { label: string; href: string };
+
+const ecosystemLinks: FooterColumnLink[] = [
+  { label: "Distribution", href: "/services" },
+  { label: "Publishing", href: "/publishing" },
+  { label: "Marketing", href: "/growth" }
 ];
 
 const organizationLinks = ["Our Story", "Get in Touch"];
@@ -38,18 +34,22 @@ const regions = [
   "North America"
 ];
 
-function FooterColumn({ title, links }: { title: string; links: string[] }) {
+function FooterColumn({ title, links }: { title: string; links: FooterColumnLink[] }) {
   return (
     <div>
       <h3 className="footer-heading">{title}</h3>
       <ul className="footer-list">
-        {links.map((link) => (
-          <li key={link}>
-            <a className="footer-link" href="#">
-              {link}
-            </a>
-          </li>
-        ))}
+        {links.map((link) => {
+          const label = typeof link === "string" ? link : link.label;
+          const href = typeof link === "string" ? "#" : link.href;
+          return (
+            <li key={label}>
+              <a className="footer-link" href={href}>
+                {label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
