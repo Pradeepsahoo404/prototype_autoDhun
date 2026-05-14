@@ -912,3 +912,56 @@ a {
   animation: about-play-ring-delayed 2.35s ease-in-out infinite;
   animation-delay: 0.42s;
 }
+
+/* Testimonials — side media: animated corner accents (no full frame border) */
+@keyframes testimonials-corner-accent {
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 4px rgba(132, 235, 12, 0.28));
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(132, 235, 12, 0.58));
+    transform: scale(1.07);
+  }
+}
+
+.testimonials-side-media__corner {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  width: 48px;
+  height: 48px;
+  animation: testimonials-corner-accent 3.4s ease-in-out infinite;
+}
+
+.testimonials-side-media__corner--tr {
+  top: 12px;
+  right: 12px;
+  border-top: 2px solid rgba(132, 235, 12, 0.92);
+  border-right: 2px solid rgba(132, 235, 12, 0.92);
+  border-radius: 0 14px 0 0;
+  transform-origin: top right;
+}
+
+.testimonials-side-media__corner--bl {
+  bottom: 12px;
+  left: 12px;
+  border-bottom: 2px solid rgba(132, 235, 12, 0.92);
+  border-left: 2px solid rgba(132, 235, 12, 0.92);
+  border-radius: 0 0 0 14px;
+  transform-origin: bottom left;
+  animation-delay: 1.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-side-media__corner {
+    animation: none;
+    opacity: 0.72;
+    transform: none;
+    filter: drop-shadow(0 0 8px rgba(132, 235, 12, 0.35));
+  }
+}

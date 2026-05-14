@@ -82,6 +82,10 @@ function useViewportWidth(ref: RefObject<HTMLElement | null>) {
 
 const LEMON_RGB = "132,235,12";
 
+/** Public asset — filename includes spaces (`Music Distribution .png`) */
+const TESTIMONIALS_SIDE_IMAGE_SRC =
+  "/Music%20Distribution%20.png" as const;
+
 /** Horizontal stock + EQ toward mic — primary / lemon */
 function SliderToMicConnector({ className }: { className?: string }) {
   const bars = [6, 12, 8, 14, 10, 16, 9];
@@ -89,7 +93,7 @@ function SliderToMicConnector({ className }: { className?: string }) {
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute left-0 top-[46%] z-[4] hidden -translate-x-full -translate-y-1/2 items-center gap-2 pr-1 md:flex",
+        "pointer-events-none absolute left-0 top-[46%] z-[4] hidden -translate-x-full -translate-y-1/2 items-center gap-2 pr-1 lg:flex",
         className
       )}
     >
@@ -125,16 +129,22 @@ function TestimonialsRightFigure({ showConnector }: { showConnector: boolean }) 
       )}
     >
       {showConnector ? <SliderToMicConnector /> : null}
-      <div className=" relative mx-auto flex w-full max-w-[min(380px,92vw)] flex-1 items-center justify-center md:max-w-[min(400px,36vw)] lg:max-w-[min(420px,34vw)]">
-        <div className=" relative w-full max-w-[min(340px,88vw)] overflow-hidden rounded-2xl border-2 border-[rgba(132,235,12,0.55)] bg-black shadow-[0_0_48px_rgba(132,235,12,0.12),0_24px_60px_rgba(0,0,0,0.55)]">
-          {/* `unoptimized` + intrinsic size: Next image optimizer often skips local SVG; `fill` can collapse without a sized box */}
+      <div className=" relative mx-auto flex w-full max-w-[min(400px,92vw)] flex-1 items-center justify-center lg:max-w-[min(420px,34vw)]">
+        <div className="testimonials-side-media relative w-full max-w-[min(360px,90vw)] overflow-hidden rounded-2xl bg-black shadow-[0_20px_56px_rgba(0,0,0,0.5),0_0_36px_rgba(132,235,12,0.06)]">
+          <span
+            aria-hidden
+            className="testimonials-side-media__corner testimonials-side-media__corner--tr"
+          />
+          <span
+            aria-hidden
+            className="testimonials-side-media__corner testimonials-side-media__corner--bl"
+          />
           <Image
-            alt=""
-            className="h-auto w-full object-contain p-3 sm:p-4"
-            height={480}
-            src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&h=128&q=80"}
-            unoptimized
-            width={400}
+            alt="Music distribution graphic with platform icons"
+            className="relative z-[1] h-auto w-full object-contain p-4"
+            height={800}
+            src={TESTIMONIALS_SIDE_IMAGE_SRC}
+            width={800}
           />
         </div>
       </div>
@@ -174,11 +184,10 @@ function TestimonialCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full w-full shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl border bg-[#0c0c0c] p-5 shadow-lg transition-[transform,box-shadow,opacity] duration-500 ease-out will-change-transform sm:p-6",
-        "border-white/[0.08]",
+        "group relative flex h-full w-full shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl bg-[#0c0c0c] p-6 shadow-lg transition-[transform,box-shadow,opacity] duration-500 ease-out will-change-transform",
         active
-          ? "z-[2] scale-[1.06] opacity-100 shadow-[0_28px_70px_rgba(0,0,0,0.55),0_0_0_1px_rgba(132,235,12,0.42),0_0_44px_rgba(132,235,12,0.2)] md:scale-[1.12]"
-          : "z-[1] scale-[0.94] opacity-[0.72] shadow-[0_0_0_1px_rgba(132,235,12,0.12)] md:scale-[0.92] md:opacity-[0.78]"
+          ? "z-[2] scale-[1.06] opacity-100 shadow-[0_28px_70px_rgba(0,0,0,0.55),0_0_0_1px_rgba(132,235,12,0.42),0_0_44px_rgba(132,235,12,0.2)] lg:scale-[1.12]"
+          : "z-[1] scale-[0.94] opacity-[0.72] shadow-[0_0_0_1px_rgba(132,235,12,0.12)] lg:scale-[0.92] lg:opacity-[0.78]"
       )}
     >
       <span
@@ -194,7 +203,7 @@ function TestimonialCard({
 
       <StarsRow />
 
-      <p className="relative z-[1] mt-4 text-[15px] leading-relaxed text-white/88 sm:text-base sm:leading-[1.65]">
+      <p className="relative z-[1] mt-4 text-base leading-[1.65] text-white/88">
         {shown}
         {long ? (
           <>
@@ -234,7 +243,7 @@ function TestimonialCard({
         </div>
         <div className="min-w-0">
           <p className="truncate text-sm font-bold text-white">{item.name}</p>
-          <p className="truncate text-xs font-medium text-[var(--color-primary)] sm:text-sm">
+          <p className="truncate text-sm font-medium text-[var(--color-primary)]">
             {item.role}
           </p>
         </div>
@@ -329,10 +338,10 @@ export function TestimonialsSection({ className }: { className?: string }) {
     [reduceMotion, slideIndex]
   );
 
-  /** Exactly three card columns (+ two gaps) fit in the carousel viewport width */
+  /** Fixed card widths per coarse viewport bucket (not fluid per-pixel) */
   const GAP = 12;
   const CARD =
-    vw > 0 ? Math.max(168, Math.floor((vw - 2 * GAP - 2) / 3)) : 280;
+    vw > 0 ? (vw < 480 ? 260 : vw < 768 ? 276 : vw < 1024 ? 292 : 308) : 280;
   const pad = vw > 0 ? Math.max(8, (vw - CARD) / 2) : 16;
 
   const translate =
@@ -345,7 +354,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        "relative w-full overflow-x-clip overflow-y-visible bg-black pb-12 pt-2 text-white sm:pb-14 sm:pt-3 lg:pb-16 lg:pt-4",
+        "relative w-full overflow-x-clip overflow-y-visible bg-black pb-14 pt-3 text-white lg:pb-16 lg:pt-4",
         className
       )}
       aria-label="Testimonials"
@@ -361,23 +370,23 @@ export function TestimonialsSection({ className }: { className?: string }) {
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[min(1600px,calc(100%-24px))] px-4 sm:px-6 lg:px-10">
-        <div className="relative grid w-full min-w-0 items-stretch gap-10 md:grid-cols-[minmax(0,1fr)_clamp(268px,34vw,430px)] md:gap-8 lg:gap-12 xl:gap-14">
+      <div className="relative mx-auto w-full max-w-[min(1600px,calc(100%-24px))] px-6 lg:px-10">
+        <div className="relative grid w-full min-w-0 items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_clamp(268px,34vw,430px)] lg:gap-12 xl:gap-14">
           <div className="relative min-w-0 overflow-visible">
-            <p className="faq-kicker mb-2 text-[12px] sm:text-sm">
+            <p className="faq-kicker mb-2 text-sm">
               Voices from labels &amp; artists
             </p>
             <h2 className="faq-title !text-[clamp(1.25rem,2.2vw+0.6rem,2.25rem)]">
               Trusted by teams shipping music worldwide
             </h2>
-            <p className="faq-subtitle mb-8 max-w-2xl sm:mb-10">
+            <p className="faq-subtitle mb-10 max-w-2xl">
               Real workflows — distribution, rights, and analytics — told in
               their own words.
             </p>
 
             <div
               ref={viewportRef}
-              className="relative overflow-x-hidden overflow-y-visible py-6 md:py-8"
+              className="relative overflow-x-hidden overflow-y-visible py-8"
             >
               <div
                 className={cn(
@@ -420,7 +429,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
             </div>
 
             <div
-              className="mt-2 flex justify-center gap-2 md:mt-4"
+              className="mt-4 flex justify-center gap-2"
               aria-label="Choose testimonial"
             >
               {ITEMS.map((item, i) => {
@@ -433,7 +442,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
                     aria-current={on ? "true" : undefined}
                     suppressHydrationWarning
                     className={cn(
-                      "size-2.5 rounded-full border transition-[background-color,transform,box-shadow] sm:size-3",
+                      "size-3 rounded-full border transition-[background-color,transform,box-shadow]",
                       on
                         ? "scale-110 border-[var(--color-primary)] bg-[var(--color-primary)] shadow-[0_0_14px_rgba(132,235,12,0.55)]"
                         : "border-[rgba(132,235,12,0.5)] bg-transparent hover:border-[var(--color-primary)]"
@@ -445,12 +454,10 @@ export function TestimonialsSection({ className }: { className?: string }) {
             </div>
           </div>
 
-          <div className="relative min-h-0 min-w-0 md:flex md:flex-col md:justify-center lg:pl-1">
-            <div className="relative mx-auto hidden w-full md:block">
+          <div className="relative min-h-0 min-w-0 lg:flex lg:flex-col lg:justify-center lg:pl-1">
+            {/* Side graphic: large screens only (lg+), not tablets / every intermediate width */}
+            <div className="relative mx-auto w-full max-lg:hidden lg:flex">
               <TestimonialsRightFigure showConnector />
-            </div>
-            <div className="relative mx-auto mt-10 w-full md:mt-0 md:hidden">
-              <TestimonialsRightFigure showConnector={false} />
             </div>
           </div>
         </div>
