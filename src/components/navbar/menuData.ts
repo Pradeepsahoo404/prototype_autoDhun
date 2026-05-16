@@ -34,7 +34,7 @@ export const mainNavigation: NavMenuEntry[] = [
     submenu: [
       { title: "About Us", href: "/about/about-us" },
       { title: "Our Story", href: "/about/our-story" },
-      { title: "Work With Autodhun", href: "/about/work-with-autodhun" }
+      // { title: "Work With Autodhun", href: "/about/work-with-autodhun" }
     ]
   },
   {
@@ -103,10 +103,7 @@ export const mainNavigation: NavMenuEntry[] = [
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "Security and technology abstract",
     description: "Initiatives that protect creators and support the ecosystem.",
-    submenu: [
-      { title: "Autodhun Anti-Piracy", href: "/foundation/autodhun-anti-piracy" },
-      { title: "Autodhun & Co.", href: "/foundation/autodhun-and-co" }
-    ]
+    submenu: [{ title: "Autodhun Anti-Piracy", href: "/foundation/autodhun-anti-piracy" }]
   },
   {
     id: "autodhun-red",
@@ -118,22 +115,12 @@ export const mainNavigation: NavMenuEntry[] = [
     description: "The Autodhun Red experience."
   },
   {
-    id: "organization",
-    title: "Organization",
-    href: "/organization",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1cc?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Corporate building facade",
-    description: "Structure, leadership, and how we operate."
-  },
-  {
-    id: "contact",
-    title: "Contact",
-    href: "/contact",
+    id: "get-in-touch",
+    title: "Get in Touch",
+    href: "/get-in-touch",
     image:
       "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "Contact and communication",
-    description: "Reach our team for partnerships and support.",
-    submenu: [{ title: "Get in Touch", href: "/get-in-touch" }]
+    description: "Reach our team for partnerships and support."
   }
 ];

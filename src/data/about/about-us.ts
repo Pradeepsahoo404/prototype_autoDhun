@@ -181,33 +181,6 @@ export const aboutUsContent = {
             "Benefit from stronger industry representation, licensing support, and evolving policy initiatives designed to protect creators and rights owners."
         }
       ]
-    },
-    {
-      kind: "pill-lead-prose",
-      id: "our-story",
-      pill: "OUR STORY",
-      pillVariant: "band",
-      subheading: "Built For Independent Artists",
-      paragraphs: [
-        "India’s independent music movement is evolving rapidly, with talented artists shaping the future of music every day. Yet many creators still face challenges in reaching global audiences, growing sustainably, and unlocking fair monetization opportunities.",
-        "AUTODHUN was founded to bridge that gap. With a strong understanding of India’s diverse music culture and a global vision for artist growth, we provide the technology, distribution, marketing, and support artists need to expand their reach beyond borders.",
-        "Our mission is simple — empower independent talent with the right tools, opportunities, and industry support to grow, thrive, and build lasting impact worldwide."
-      ]
-    },
-    {
-      kind: "pill-stack",
-      id: "where-we-want-to-be",
-      pill: "Where Do We Want To Be?",
-      pillVariant: "band",
-      stacks: [
-        {
-          title: "OUR AIM",
-          paragraphs: [
-            "We want to connect creativity with success. Our platform helps artists not just make money but also build their brand and grow their audience. From sync opportunities and playlist placements to detailed analytics, we offer everything you need to stand out in a competitive world.",
-            "We’re here to make a difference in the independent music industry. We ensure that every artist gets the support they need to take their music to new heights."
-          ]
-        }
-      ]
     }
   ] satisfies AboutUsSection[]
 };

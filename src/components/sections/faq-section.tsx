@@ -66,7 +66,7 @@ const defaultItems: FaqItem[] = [
 ];
 
 export function FaqSection({ items = defaultItems }: { items?: FaqItem[] }) {
-  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <section className="faq-shell" aria-label="Frequently asked questions">

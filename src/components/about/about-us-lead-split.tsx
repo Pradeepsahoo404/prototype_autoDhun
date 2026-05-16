@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -14,6 +15,9 @@ const headlineClass = cn(
   /** Same scale as service benefits + `HeroService` (“Release Your Music. Own Your Future.”). */
   "!text-[clamp(14px,min(5vw,5.5vmin),42px)] !leading-[1.1] !tracking-[-0.01em]"
 );
+
+/** Same type as About Us hero headline (“Empowering the Future of Independent Music”). */
+export const aboutLeadHeroHeadlineClass = headlineClass;
 
 const bodyMuted = cn(
   "m-0 max-w-full min-w-0 text-[15px] font-normal leading-relaxed text-[#989898] [overflow-wrap:anywhere] sm:text-base sm:leading-[1.65]"
@@ -135,7 +139,7 @@ function AboutLeadBackgroundMotion({ reduceMotion }: { reduceMotion: boolean }) 
 }
 
 /** Rounded card + lift shadow + lime L-accent + motion (float, shine, entrance). */
-function LeadImageCard({
+export function LeadImageCard({
   alt,
   className,
   priority,
@@ -213,22 +217,15 @@ function LeadImageCard({
   );
 }
 
-/**
- * Top of About Us: motion-matched to service visuals — ambient lime halo, staggered copy,
- * image cards with entrance + gentle float + shine sweep; hero mark slow rotation.
- */
-export function AboutUsLeadSplit({
-  hero,
-  lead,
+/** Shared black page shell: orbs, dot grid, ambient halo, rotating mark — children = lead rows. */
+export function AboutLeadPageShell({
+  children,
   className
 }: {
-  hero: AboutUsHeroContent;
-  lead: AboutUsLeadSplitContent;
+  children: ReactNode;
   className?: string;
 }) {
   const reduceMotion = useReducedMotion();
-  const { kicker, headline } = hero;
-  const { mission, rights } = lead;
 
   return (
     <section className={cn("relative min-w-0 max-w-full overflow-x-clip bg-black text-white", className)}>
@@ -270,6 +267,31 @@ export function AboutUsLeadSplit({
           <AboutUsHeroMark className="h-full w-full opacity-90" />
         </motion.div>
 
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Top of About Us: motion-matched to service visuals — ambient lime halo, staggered copy,
+ * image cards with entrance + gentle float + shine sweep; hero mark slow rotation.
+ */
+export function AboutUsLeadSplit({
+  hero,
+  lead,
+  className
+}: {
+  hero: AboutUsHeroContent;
+  lead: AboutUsLeadSplitContent;
+  className?: string;
+}) {
+  const reduceMotion = useReducedMotion();
+  const { kicker, headline } = hero;
+  const { mission, rights } = lead;
+
+  return (
+    <AboutLeadPageShell className={className}>
         {/* Row 1 — text (left), image card (right) */}
         <div className="relative z-[1] grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-10">
           <motion.div
@@ -341,7 +363,64 @@ export function AboutUsLeadSplit({
             </motion.div>
           </div>
         </div>
+    </AboutLeadPageShell>
+  );
+}
+
+/**
+ * Same visual language as the first row of About Us (text + image card with lime corner accent).
+ * For `/about/our-story` and similar single-hero pages.
+ */
+export function AboutUsSingleRowLead({
+  body,
+  className,
+  hero,
+  imageAlt,
+  imageSrc
+}: {
+  body: string;
+  className?: string;
+  hero: AboutUsHeroContent;
+  imageAlt: string;
+  imageSrc: string;
+}) {
+  const reduceMotion = useReducedMotion();
+  const { kicker, headline } = hero;
+
+  return (
+    <AboutLeadPageShell className={className}>
+      <div className="relative z-[1] grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-x-14 lg:gap-y-10">
+        <motion.div
+          className="relative min-w-0 max-w-full pr-12 sm:pr-16 md:pr-20 lg:max-w-none lg:pr-8"
+          initial={reduceMotion ? false : "hidden"}
+          viewport={view}
+          whileInView="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.12, delayChildren: 0.06 } }
+          }}
+        >
+          <motion.p className="faq-kicker !mx-0 !mb-3 !mt-0 text-left sm:!mb-3.5" variants={fadeUpItem}>
+            {kicker}
+          </motion.p>
+          <motion.h1 className={cn(headlineClass, "text-left")} variants={fadeUpItem}>
+            {headline}
+          </motion.h1>
+          <motion.p className={cn(bodyMuted, "mt-3 max-w-none text-left sm:mt-4")} variants={fadeUpItem}>
+            {body}
+          </motion.p>
+        </motion.div>
+
+        <LeadImageCard
+          alt={imageAlt}
+          className="mx-auto max-w-lg sm:max-w-none lg:mx-0"
+          priority
+          reduceMotion={!!reduceMotion}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          slideFrom="right"
+          src={imageSrc}
+        />
       </div>
-    </section>
+    </AboutLeadPageShell>
   );
 }

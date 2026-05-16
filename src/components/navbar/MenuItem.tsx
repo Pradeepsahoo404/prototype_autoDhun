@@ -51,7 +51,7 @@ export function MenuItem({
     "nav-menu-primary group relative flex w-full max-w-[min(100%,336px)] items-center py-0 pr-12 text-left sm:pr-16 sm:whitespace-nowrap";
 
   const titleClass = cn(
-    "relative inline-flex min-h-[56px] w-full min-w-0 max-w-[280px] items-center transition-colors duration-500 ease-out sm:min-h-[72px] sm:whitespace-nowrap lg:min-h-0 lg:shrink-0",
+    "relative inline-flex min-h-[50px] w-full min-w-0 max-w-[280px] items-center transition-colors duration-500 ease-out sm:min-h-[64px] sm:whitespace-nowrap lg:min-h-[44px] lg:shrink-0",
     titleGreen
       ? "text-[var(--color-primary)]"
       : "text-white group-hover:text-[var(--color-primary)]"

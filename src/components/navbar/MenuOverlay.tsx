@@ -96,7 +96,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
         <p className="sr-only" id={`${listId}-label`}>
           Primary pages
         </p>
-        <ul className="m-0 flex min-h-0 list-none flex-col gap-0 p-0 lg:max-h-full lg:flex-1 lg:justify-between lg:overflow-hidden lg:py-1">
+        <ul className="m-0 flex min-h-0 list-none flex-col gap-0 p-0 lg:max-h-full lg:flex-1 lg:justify-start lg:gap-y-4 lg:overflow-hidden lg:py-1">
           {mainNavigation.map((item, index) => (
             <MenuItem
               accordionMode={accordionMode}
@@ -123,12 +123,11 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
         {submenu?.length && hoveredEntry ? (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-1 lg:gap-0"
+            className="flex flex-col gap-1 lg:gap-y-2.5"
             initial={false}
             key={hoveredEntry.id}
             transition={{ duration: reduceMotion ? 0.12 : 0.4, ease: easeLux }}
           >
-            <p className="nav-menu-submenu-heading mb-1 text-white/60 lg:mb-0.5">{hoveredEntry.title}</p>
             <ul className="m-0 flex list-none flex-col gap-0 p-0">
               {submenu.map((sub) => {
                 const subActive = isRouteActive(pathname, sub.href);
@@ -157,7 +156,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
                       <motion.span
                         animate={{ x: reduceMotion ? 0 : subActive ? 4 : 0 }}
                         className={cn(
-                          "relative inline-flex min-h-[48px] w-full items-center transition-colors duration-500 ease-out lg:min-h-[34px]",
+                          "relative inline-flex min-h-[44px] w-full items-center transition-colors duration-500 ease-out lg:min-h-[40px]",
                           subLit
                             ? "text-[var(--color-primary)]"
                             : "text-white/70 group-hover:text-[var(--color-primary)]"

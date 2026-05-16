@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useRef } from "react";
-import { ArrowDown } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 
 import {
@@ -90,56 +89,9 @@ function AnimatedTimelineCircle({ fill, label }: { fill: MotionValue<number>; la
   );
 }
 
-function TimelineBetweenArrows({
-  index,
-  progress,
-  reduceMotion
-}: {
-  index: number;
-  progress: MotionValue<number>;
-  reduceMotion: boolean;
-}) {
-  const range = index === 0 ? ([0.2, 0.48] as const) : ([0.5, 0.78] as const);
-  const opacity = useTransform(progress, [range[0], range[1]], [0.12, 1], { clamp: true });
-  const glow = useTransform(progress, [range[0], range[1]], [0.2, 1], { clamp: true });
-  const arrowScale = useTransform(progress, [range[0], range[1]], [0.88, 1], { clamp: true });
-
-  if (reduceMotion) {
-    return (
-      <div className="relative flex justify-center py-2 lg:py-1">
-        <div className="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 bg-gradient-to-b from-[var(--color-primary)]/25 to-[var(--color-primary)]/10 lg:block" />
-        <ArrowDown aria-hidden className="relative z-[1] size-4 text-[var(--color-primary)]" strokeWidth={2.5} />
-      </div>
-    );
-  }
-
-  return (
-    <motion.div
-      className="relative flex flex-col items-center justify-center py-2.5 sm:py-4 lg:py-3"
-      style={{ opacity }}
-    >
-      <div className="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 lg:block">
-        <motion.div
-          className="h-full w-full bg-gradient-to-b from-[var(--color-primary)]/70 via-[var(--color-primary)]/35 to-white/[0.08]"
-          style={{ opacity: glow }}
-        />
-      </div>
-      <motion.div className="relative z-[1] flex flex-col items-center" style={{ scale: arrowScale }}>
-        <div className="h-8 w-px rounded-full bg-gradient-to-b from-[var(--color-primary)]/65 to-transparent lg:hidden" />
-        <ArrowDown
-          aria-hidden
-          className="-mt-0.5 size-[1.05rem] text-[var(--color-primary)] drop-shadow-[0_0_12px_color-mix(in_oklab,var(--color-primary)_55%,transparent)] sm:size-4"
-          strokeWidth={2.5}
-        />
-      </motion.div>
-    </motion.div>
-  );
-}
-
 export function AboutUsPurposeVisionTimeline({ section }: { section: AboutUsSectionPillStack }) {
   const reduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
-  const n = section.stacks.length;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -174,7 +126,7 @@ export function AboutUsPurposeVisionTimeline({ section }: { section: AboutUsSect
               />
             </div>
 
-            <div className="flex flex-col gap-0">
+            <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
               {section.stacks.map((stack, i) => {
                 const label = padNum(i + 1);
                 const fill = fills[i] ?? fill2;
@@ -202,7 +154,7 @@ export function AboutUsPurposeVisionTimeline({ section }: { section: AboutUsSect
                 return (
                   <Fragment key={stack.title}>
                     <motion.div
-                      className="relative flex flex-col items-stretch gap-4 pb-3 pt-0 sm:gap-5 sm:pb-4 sm:pt-1 lg:flex-row lg:items-center lg:gap-10 lg:px-1 lg:pb-6 lg:pt-2"
+                      className="relative flex flex-col items-stretch gap-4 pb-0 pt-0 sm:gap-5 sm:pt-1 lg:flex-row lg:items-center lg:gap-10 lg:px-1 lg:pb-0 lg:pt-2"
                       initial={reduceMotion ? false : { opacity: 0, y: 22 }}
                       transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
                       viewport={{ once: true, margin: "-48px 0px", amount: 0.15 }}
@@ -222,10 +174,6 @@ export function AboutUsPurposeVisionTimeline({ section }: { section: AboutUsSect
                         </>
                       )}
                     </motion.div>
-
-                    {i < n - 1 ? (
-                      <TimelineBetweenArrows index={i} progress={progress} reduceMotion={!!reduceMotion} />
-                    ) : null}
                   </Fragment>
                 );
               })}
