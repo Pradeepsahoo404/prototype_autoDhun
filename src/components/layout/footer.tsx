@@ -1,28 +1,35 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Mail, MapPin, Phone } from "lucide-react";
 
-type FooterColumnLink = string | { label: string; href: string };
+type FooterColumnLink = { label: string; href: string };
 
 const ecosystemLinks: FooterColumnLink[] = [
-  { label: "Distribution", href: "/services" },
-  { label: "Publishing", href: "/publishing" },
-  { label: "Marketing", href: "/growth" }
+  { label: "Distribution", href: "/services/music-distribution" },
+  { label: "Publishing", href: "/publishing/administration" },
+  { label: "Marketing", href: "/growth/marketing-tools" }
 ];
 
-const organizationLinks = ["Our Story", "Get in Touch"];
+const organizationLinks: FooterColumnLink[] = [
+  { label: "Our Story", href: "/about/our-story" },
+  { label: "Get in Touch", href: "/get-in-touch" }
+];
 
-const dashboardLinks = ["Get Started", "Sign In"];
+const dashboardLinks: FooterColumnLink[] = [
+  { label: "Get Started", href: "/get-started" },
+  { label: "Sign In", href: "/sign-in" }
+];
 
-const complianceLinks = [
-  "Corporate Policy",
-  "Content Guidelines",
-  "Privacy & Data",
-  "Terms & Conditions",
-  "Cookie Preferences",
-  "Distribution Terms",
-  "Sync Licensing Terms",
-  "Fraud & Abuse Policy"
+const complianceLinks: FooterColumnLink[] = [
+  { label: "Corporate Policy", href: "#" },
+  { label: "Content Guidelines", href: "#" },
+  { label: "Privacy & Data", href: "#" },
+  { label: "Terms & Conditions", href: "#" },
+  { label: "Cookie Preferences", href: "#" },
+  { label: "Distribution Terms", href: "#" },
+  { label: "Sync Licensing Terms", href: "#" },
+  { label: "Fraud & Abuse Policy", href: "#" }
 ];
 
 const regions = [
@@ -39,17 +46,13 @@ function FooterColumn({ title, links }: { title: string; links: FooterColumnLink
     <div>
       <h3 className="footer-heading">{title}</h3>
       <ul className="footer-list">
-        {links.map((link) => {
-          const label = typeof link === "string" ? link : link.label;
-          const href = typeof link === "string" ? "#" : link.href;
-          return (
-            <li key={label}>
-              <a className="footer-link" href={href}>
-                {label}
-              </a>
-            </li>
-          );
-        })}
+        {links.map((link) => (
+          <li key={link.label}>
+            <Link className="footer-link" href={link.href}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );

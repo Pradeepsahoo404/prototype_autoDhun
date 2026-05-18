@@ -344,6 +344,145 @@ body {
   line-height: 1.3;
 }
 
+.faq-shell--autodhun-red .faq-left .faq-kicker,
+.faq-shell--autodhun-red .faq-kicker {
+  color: #e8222a !important;
+}
+
+.faq-shell--autodhun-red .faq-item--open {
+  border-color: color-mix(in oklab, #e8222a 32%, rgba(255, 255, 255, 0.1));
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.4),
+    0 0 24px -8px color-mix(in oklab, #e8222a 22%, transparent);
+}
+
+.faq-shell--autodhun-red .faq-item:hover {
+  border-color: color-mix(in oklab, #e8222a 18%, rgba(255, 255, 255, 0.1));
+}
+
+/* Autodhun Red — single continuous page, no section divider lines */
+.autodhun-red-page > section {
+  border-top: none !important;
+}
+
+.autodhun-red-page .faq-shell {
+  border-top: none !important;
+  padding: clamp(2.25rem, 4.5vw, 3.25rem) 0 clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.autodhun-red-page .autodhun-red-block {
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.autodhun-red-page .autodhun-red-block--hero {
+  padding-top: calc(var(--site-header-height, 84px) + clamp(1.25rem, 3vw, 2rem));
+  padding-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Autodhun Red plans — continuous page (inherits .autodhun-red-page spacing) */
+.autodhun-red-plans-page > section,
+.autodhun-red-plans-page .autodhun-red-block {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.autodhun-red-plans-ambient__pulse {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -8%, rgba(232, 34, 42, 0.2) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 45% at 88% 42%, rgba(232, 34, 42, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 40% at 8% 72%, rgba(120, 10, 18, 0.1) 0%, transparent 50%);
+  animation: autodhun-red-plans-ambient-pulse 14s ease-in-out infinite;
+}
+
+.autodhun-red-plans-ambient__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.autodhun-red-plans-ambient__glow--top {
+  left: 50%;
+  top: 12%;
+  width: min(90vw, 720px);
+  height: min(55vw, 420px);
+  transform: translateX(-50%);
+  background: rgba(232, 34, 42, 0.14);
+}
+
+.autodhun-red-plans-ambient__glow--mid {
+  right: -12%;
+  top: 48%;
+  width: min(55vw, 380px);
+  height: min(45vw, 320px);
+  background: rgba(232, 34, 42, 0.07);
+}
+
+.autodhun-red-plans-ambient__glow--bottom {
+  left: -8%;
+  bottom: 8%;
+  width: min(50vw, 340px);
+  height: min(40vw, 280px);
+  background: rgba(139, 0, 0, 0.08);
+}
+
+.autodhun-red-plans-ambient__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 80% at 50% 50%, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+@keyframes autodhun-red-plans-ambient-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .autodhun-red-plans-ambient__pulse {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: 980px) {
+  .autodhun-red-page .faq-left {
+    text-align: left;
+  }
+
+  .autodhun-red-page .faq-grid {
+    gap: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .autodhun-red-page .faq-accordion {
+    max-width: 100%;
+  }
+
+  .autodhun-red-page .faq-button {
+    padding-inline: 1rem 2.75rem;
+    min-height: 3.25rem;
+  }
+
+  .autodhun-red-page .faq-button-text {
+    font-size: 13px;
+    line-height: 1.25;
+    max-width: 100%;
+    text-transform: none;
+  }
+
+  .autodhun-red-page .faq-panel {
+    padding-inline: 1rem;
+  }
+}
+
 .faq-title {
   margin: 0 0 12px;
   font-size: clamp(28px, 4.6vw, 42px);

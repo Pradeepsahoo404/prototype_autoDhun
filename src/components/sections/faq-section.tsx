@@ -2,10 +2,20 @@
 
 import { useState } from "react";
 
-type FaqItem = {
+export type FaqItem = {
   id: string;
   question: string;
   answer: string;
+};
+
+export type FaqSectionProps = {
+  items?: FaqItem[];
+  kicker?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  subtitle?: string;
+  /** Applies Autodhun Red accent styling (red kicker, open-state borders). */
+  variant?: "default" | "autodhun-red";
 };
 
 const defaultItems: FaqItem[] = [
@@ -65,21 +75,31 @@ const defaultItems: FaqItem[] = [
   }
 ];
 
-export function FaqSection({ items = defaultItems }: { items?: FaqItem[] }) {
+export function FaqSection({
+  items = defaultItems,
+  kicker = "FAQS",
+  titleLine1 = "YOUR MUSIC QUESTIONS ,",
+  titleLine2 = "ANSWERED",
+  subtitle = "Unlock Everything About Autodhun Digital",
+  variant = "default"
+}: FaqSectionProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <section className="faq-shell" aria-label="Frequently asked questions">
+    <section
+      className={`faq-shell${variant === "autodhun-red" ? " faq-shell--autodhun-red" : ""}`}
+      aria-label="Frequently asked questions"
+    >
       <div className="faq-container">
         <div className="faq-grid">
           <div className="faq-left">
-            <p className="faq-kicker">FAQS</p>
+            <p className="faq-kicker">{kicker}</p>
             <h2 className="faq-title">
-              YOUR MUSIC QUESTIONS ,
+              {titleLine1}
               <br />
-              ANSWERED
+              {titleLine2}
             </h2>
-            <p className="faq-subtitle">Unlock Everything About Autodhun Digital</p>
+            <p className="faq-subtitle">{subtitle}</p>
           </div>
 
           <div className="faq-spacer" aria-hidden="true" />

@@ -10,7 +10,7 @@ export function AboutSection({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        "relative w-full min-w-0 overflow-x-clip border-t border-white/[0.06] bg-black py-14 text-white sm:py-16 md:py-20 lg:py-24",
+        "relative w-full min-w-0 overflow-x-clip bg-black py-14 text-white sm:py-16 md:py-20 lg:py-24",
         className
       )}
       id="overview"

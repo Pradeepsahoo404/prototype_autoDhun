@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 import { AboutSection } from "@/components/sections/about-section";
+import { FeaturedPressSection } from "@/components/sections/featured-press-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { PreferredProviderSection } from "@/components/sections/preferred-provider-section";
 import { ServicesSection } from "@/components/sections/services-section";
@@ -47,12 +47,12 @@ export default function Home() {
                 Get Started
                 <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
               </LinkButton>
-              <Link
+              {/* <Link
                 className={`${navActionBtn} !h-11 w-full !rounded-full !px-6 border-0 bg-white text-sm text-[#0b0b0b] shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-[opacity,transform] hover:opacity-90 active:translate-y-px sm:!h-12 sm:w-auto sm:!px-8 sm:text-base`}
                 href="/sign-in"
               >
                 Sign In
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -69,6 +69,8 @@ export default function Home() {
       <SectionPillHeading className="pt-10 pb-6 sm:pt-12 sm:pb-8" heading="Services" />
 
       <ServicesSection />
+
+      <FeaturedPressSection />
 
       <AboutSection />
 

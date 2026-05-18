@@ -95,16 +95,16 @@ export const mainNavigation: NavMenuEntry[] = [
       { title: "Music Marketing", href: "/growth/music-marketing" }
     ]
   },
-  {
-    id: "foundation",
-    title: "Foundation",
-    href: "/foundation",
-    image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Security and technology abstract",
-    description: "Initiatives that protect creators and support the ecosystem.",
-    submenu: [{ title: "Autodhun Anti-Piracy", href: "/foundation/autodhun-anti-piracy" }]
-  },
+  // {
+  //   id: "foundation",
+  //   title: "Foundation",
+  //   href: "/foundation",
+  //   image:
+  //     "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80",
+  //   imageAlt: "Security and technology abstract",
+  //   description: "Initiatives that protect creators and support the ecosystem.",
+  //   submenu: [{ title: "Autodhun Anti-Piracy", href: "/foundation/autodhun-anti-piracy" }]
+  // },
   {
     id: "autodhun-red",
     title: "Autodhun Red",

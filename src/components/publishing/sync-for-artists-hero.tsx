@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 import { LinkButton } from "@/components/ui/button";
 import type { PublishingSyncForArtistsHeroContent } from "@/data/publishing/sync-for-artists";
@@ -20,7 +19,7 @@ export function PublishingSyncForArtistsHero({
   content: PublishingSyncForArtistsHeroContent;
   className?: string;
 }) {
-  const { kicker, titleLine1, titleLine2, subtitle, primaryCta, secondaryCta } = content;
+  const { kicker, titleLine1, titleLine2, subtitle, primaryCta } = content;
 
   return (
     <section className={cn("relative overflow-hidden bg-black", className)}>
@@ -53,12 +52,14 @@ export function PublishingSyncForArtistsHero({
                 {primaryCta.label}
                 <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
               </LinkButton>
+              {/* View Pricing — secondary CTA
               <Link
                 className={`${navActionBtn} !h-11 w-full !rounded-full !px-6 border-0 bg-white text-sm text-[#0b0b0b] shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-[opacity,transform] hover:opacity-90 active:translate-y-px sm:!h-12 sm:w-auto sm:!px-8 sm:text-base`}
                 href={secondaryCta.href}
               >
                 {secondaryCta.label}
               </Link>
+              */}
             </div>
           </div>
         </div>
