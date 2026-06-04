@@ -1,7 +1,7 @@
 "use client";
 
 import { SiteImage } from "@/components/ui/site-image";
-import { siteVideos } from "@/lib/site-images";
+import { getIntroVideoSrc } from "@/lib/site-images";
 import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -27,7 +27,7 @@ type AboutSectionMediaProps = {
 export function AboutSectionMedia({
   imageSrc,
   imageAlt,
-  videoSrc = siteVideos.intro,
+  videoSrc = getIntroVideoSrc(),
   className,
 }: AboutSectionMediaProps) {
   const [open, setOpen] = useState(false);

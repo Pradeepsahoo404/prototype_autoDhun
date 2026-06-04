@@ -24,10 +24,18 @@ export const homeImages = {
   testimonials: siteImage("Home page", "Testimonials 1024x1024.png")
 } as const;
 
-/** Public videos under `public/videos/`. */
-export const siteVideos = {
-  intro: "/videos/autodhun_intro_video.mp4"
-} as const;
+/** Local About-section intro (gitignored if >100MB — see `public/videos/`). */
+export const LOCAL_INTRO_VIDEO_PATH = "/videos/autodhun_intro_video.mp4";
+
+/**
+ * About-section intro video.
+ * - Dev: uses `public/videos/autodhun_intro_video.mp4` when env is unset.
+ * - Production: set `NEXT_PUBLIC_INTRO_VIDEO_URL` (e.g. Cloudinary raw/video URL).
+ */
+export function getIntroVideoSrc(): string {
+  const remote = process.env.NEXT_PUBLIC_INTRO_VIDEO_URL?.trim();
+  return remote || LOCAL_INTRO_VIDEO_PATH;
+}
 
 export const navImages = {
   home: siteImage("Navigation menu", "Home nav 1600x1066.jpg"),
