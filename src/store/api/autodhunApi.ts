@@ -50,8 +50,7 @@ export const autodhunApi = createApi({
     }),
     getSiteDetails: builder.query<SiteDetailsDto, void>({
       query: () => "/site-details",
-      providesTags: ["SiteDetails"],
-      refetchOnMountOrArgChange: true
+      providesTags: ["SiteDetails"]
     }),
     subscribeNewsletter: builder.mutation<
       NewsletterSubscribeResponse,
