@@ -7,8 +7,8 @@ type SiteImageProps = Omit<ImageProps, "loading"> & {
 
 function srcNeedsUnoptimized(src: ImageProps["src"]): boolean {
   if (typeof src !== "string") return false;
-  // Next.js /_next/image returns 500 when the public path contains "%" (e.g. "Keep 100% Ownership.png").
-  return src.includes("%");
+  // Bypass optimizer for encoded public paths (% / &) — avoids 500s and broken query strings.
+  return src.includes("%") || src.includes("&");
 }
 
 /** Next/Image with lazy loading by default across the marketing site. */

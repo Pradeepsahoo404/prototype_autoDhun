@@ -9,9 +9,10 @@ export function siteImage(...segments: string[]): string {
       parts.push(piece);
     }
   }
-  // Keep spaces/`&` literal — encodeURIComponent breaks those paths. Only `%` must be
-  // escaped (`%25`) or browsers treat it as URL encoding (e.g. "Keep 100% Ownership.png").
-  return `/${parts.join("/")}`.replaceAll("%", "%25");
+  // Keep spaces literal (encodeURIComponent breaks those paths on our static host).
+  // Escape reserved URL chars in filenames so Next.js `/_next/image?url=…&w=…` is not split:
+  // `%` → `%25`, `&` → `%26` (e.g. "Analytics & Worldwide Payouts.png").
+  return `/${parts.join("/")}`.replaceAll("%", "%25").replaceAll("&", "%26");
 }
 
 export const homeImages = {
