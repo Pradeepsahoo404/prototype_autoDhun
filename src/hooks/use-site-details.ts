@@ -5,7 +5,7 @@ import { useGetSiteDetailsQuery } from "@/store/api/autodhunApi";
 import type { SiteDetailsDto } from "@/types/api";
 
 export const FALLBACK_SITE_DETAILS: SiteDetailsDto = {
-  brandName: "Autodhun Digital",
+  brandName: "Autodhun",
   logoUrl: "/autodhun-logo.png",
   email: "admin@autodhundigital.in",
   phone: "9135555656",
