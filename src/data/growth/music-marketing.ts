@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Growth/Music Marketing";
+
 export type GrowthMusicMarketingBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const growthMusicMarketingContent = {
   },
   visual: {
     /** `public/Music Marketing .png` */
-    imageSrc: "/Music%20Marketing%20.png",
+    imageSrc: siteImage(SECTION, "Music Marketing banner.png"),
     imageAlt:
       "Music marketing illustration: artist at work with social, playlists, influencers, press, and email campaign icons on a black background."
   },
@@ -56,7 +60,7 @@ export const growthMusicMarketingContent = {
         title: "Audience Growth & Fan Engagement",
         description:
           "Build a loyal fanbase through targeted campaigns and meaningful audience connections.",
-        imageSrc: "/Purpose.png",
+        imageSrc: benefitImage(SECTION, "Audience Growth & Fan Engagement"),
         imageAlt: "Audience connection and purpose illustration."
       },
       {
@@ -64,7 +68,7 @@ export const growthMusicMarketingContent = {
         title: "Increased Streaming & Visibility",
         description:
           "Boost streams, reach new listeners, and expand your presence across major platforms.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Increased Streaming & Visibility"),
         imageAlt: "Streaming growth and analytics illustration."
       },
       {
@@ -72,7 +76,7 @@ export const growthMusicMarketingContent = {
         title: "Strategic Social Media Promotion",
         description:
           "Strengthen your online presence with customized marketing across Instagram, TikTok, YouTube, and more.",
-        imageSrc: "/Marketing%20Tools.png",
+        imageSrc: benefitImage(SECTION, "Strategic Social Media Promotion"),
         imageAlt: "Marketing and social promotion illustration."
       },
       {
@@ -80,7 +84,7 @@ export const growthMusicMarketingContent = {
         title: "Playlist & Media Exposure",
         description:
           "Gain opportunities for playlist placements, influencer collaborations, press coverage, and digital promotions.",
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Playlist & Media Exposure"),
         imageAlt: "Distribution and playlist exposure illustration."
       }
     ] satisfies GrowthMusicMarketingBenefit[]

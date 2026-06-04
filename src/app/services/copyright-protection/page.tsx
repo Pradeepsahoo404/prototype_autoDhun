@@ -17,7 +17,7 @@ export default function CopyrightProtectionPage() {
   const { hero, visual, benefits } = copyrightProtectionContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <CopyrightProtectionHero content={hero} />
       <CopyrightProtectionVisualHighlight content={visual} />
       <CopyrightProtectionBenefitsSection content={benefits} hideTopRule />

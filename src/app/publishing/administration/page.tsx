@@ -17,7 +17,7 @@ export default function PublishingAdministrationPage() {
   const { hero, visual, benefits } = publishingAdministrationContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <PublishingAdministrationHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <PublishingAdministrationBenefitsSection content={benefits} hideTopRule />

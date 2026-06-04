@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Publishing/Publishing Administration";
+
 export type PublishingAdministrationBenefit = {
   id: string;
   title: string;
@@ -42,7 +46,7 @@ export const publishingAdministrationContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    imageSrc: "/Picture1.png",
+    imageSrc: siteImage(SECTION, "Publishing Administration banner.png"),
     imageAlt:
       "Publishing administration infographic: royalties, licenses, global collection, claims, and registration around central rights and earnings imagery."
   },
@@ -55,7 +59,7 @@ export const publishingAdministrationContent = {
         title: "Global Royalty Collection",
         description:
           "Collect publishing royalties from streaming platforms, radio, live performances, and more worldwide.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Global Royalty Collection"),
         imageAlt: "Global royalties and payouts illustration."
       },
       {
@@ -63,7 +67,7 @@ export const publishingAdministrationContent = {
         title: "Copyright Registration & Protection",
         description:
           "Secure your compositions with proper copyright management and rights protection.",
-        imageSrc: "/Copyright%20Protection%20%20.png",
+        imageSrc: benefitImage(SECTION, "Copyright Registration & Protection"),
         imageAlt: "Copyright and rights protection illustration."
       },
       {
@@ -71,7 +75,7 @@ export const publishingAdministrationContent = {
         title: "Transparent Royalty Reporting",
         description:
           "Access detailed royalty statements and earnings reports with complete transparency.",
-        imageSrc: "/Marketing%20Tools.png",
+        imageSrc: benefitImage(SECTION, "Transparent Royalty Reporting"),
         imageAlt: "Reporting and analytics illustration."
       },
       {
@@ -79,7 +83,7 @@ export const publishingAdministrationContent = {
         title: "Sync & Licensing Opportunities",
         description:
           "Unlock opportunities for placements in films, TV shows, ads, games, and digital media.",
-        imageSrc: "/Sync%20For%20Artists%20.png",
+        imageSrc: benefitImage(SECTION, "Sync & Licensing Opportunities"),
         imageAlt: "Sync and licensing for artists illustration."
       }
     ] satisfies PublishingAdministrationBenefit[]

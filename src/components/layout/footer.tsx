@@ -1,7 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { FooterComplianceColumn } from "./footer-compliance";
+import { FooterContactDetails, FooterTopbarLogo } from "./footer-site-details";
+import { FooterNewsletter } from "./footer-newsletter";
 
 type FooterColumnLink = { label: string; href: string };
 
@@ -19,17 +20,6 @@ const organizationLinks: FooterColumnLink[] = [
 const dashboardLinks: FooterColumnLink[] = [
   { label: "Get Started", href: "/get-started" },
   { label: "Sign In", href: "/sign-in" }
-];
-
-const complianceLinks: FooterColumnLink[] = [
-  { label: "Corporate Policy", href: "#" },
-  { label: "Content Guidelines", href: "#" },
-  { label: "Privacy & Data", href: "#" },
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Cookie Preferences", href: "#" },
-  { label: "Distribution Terms", href: "#" },
-  { label: "Sync Licensing Terms", href: "#" },
-  { label: "Fraud & Abuse Policy", href: "#" }
 ];
 
 const regions = [
@@ -58,92 +48,53 @@ function FooterColumn({ title, links }: { title: string; links: FooterColumnLink
   );
 }
 
-function FooterNewsletter() {
-  return (
-    <section className="footer-newsletter" aria-label="Newsletter signup">
-      <div className="footer-newsletter-inner">
-        <div className="newsletter-text">
-          <p className="footer-newsletter-title">Stay Tuned - Get Music Updates First</p>
-        </div>
-        <form className="footer-newsletter-form">
-          <label className="sr-only" htmlFor="footer-email">
-            Enter your email
-          </label>
-          <input
-            suppressHydrationWarning
-            className="footer-newsletter-input"
-            id="footer-email"
-            name="email"
-            placeholder="Enter your email"
-            type="email"
-            autoComplete="email"
-          />
-          <button suppressHydrationWarning className="footer-newsletter-button" type="submit">
-            Subscribe
-          </button>
-        </form>
-      </div>
-    </section>
-  );
-}
-
 export function Footer() {
   return (
     <footer className="footer-shell">
       <div className="footer-container">
         <FooterNewsletter />
         <div className="footer-topbar">
-          <div className="footer-brand" aria-label="Autodhun Digital">
-            <div className="footer-logo-mark">
-              <Image
-                alt="Autodhun Digital"
-                src="/autodhun-logo.png"
-                width={134}
-                height={46}
-                priority
-              />
-            </div>
-            {/* <span>Autodhun Digital</span> */}
-          </div>
+          <FooterTopbarLogo />
 
           <div className="footer-socials" aria-label="Social media">
-            <a aria-label="Facebook" className="footer-social-link" href="#">
+            <a
+              aria-label="Facebook"
+              className="footer-social-link"
+              href="https://www.facebook.com/Autodhun/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i aria-hidden="true" className="fa-brands fa-facebook-f" />
             </a>
-            <a aria-label="Instagram" className="footer-social-link" href="#">
+            <a
+              aria-label="Instagram"
+              className="footer-social-link"
+              href="https://www.instagram.com/autodhun?igsh=MjE1bWJ3YTZ3YTl6&utm_source=qr"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i aria-hidden="true" className="fa-brands fa-instagram" />
             </a>
-            <a aria-label="LinkedIn" className="footer-social-link" href="#">
+            <a
+              aria-label="LinkedIn"
+              className="footer-social-link"
+              href="https://www.linkedin.com/company/autodhun/?viewAsMember=true"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i aria-hidden="true" className="fa-brands fa-linkedin-in" />
             </a>
           </div>
         </div>
 
         <div className="footer-main">
-          <address className="footer-contact">
-            <div className="contact-item">
-              <Mail aria-hidden="true" className="footer-contact-icon" />
-              <span>admin@autodhundigital.in</span>
-            </div>
-            <div className="contact-item">
-              <Phone aria-hidden="true" className="footer-contact-icon" />
-              <span>9135555656</span>
-            </div>
-            <div className="contact-item">
-              <MapPin aria-hidden="true" className="footer-contact-icon" />
-              <span>
-                New Sarpanch Colony
-                <br />
-                Jamalpur Ludhiana- 141010
-              </span>
-            </div>
-          </address>
+          <FooterContactDetails />
 
           <div className="footer-columns">
             <FooterColumn links={ecosystemLinks} title="ECOSYSTEM" />
             <FooterColumn links={organizationLinks} title="ORGANIZATION" />
             <FooterColumn links={dashboardLinks} title="DASHBOARD" />
-            <FooterColumn links={complianceLinks} title="COMPLIANCE" />
+            <FooterComplianceColumn />
           </div>
         </div>
 
@@ -165,7 +116,7 @@ export function Footer() {
         <div className="footer-bottom-inner">
           <p>
             <span className="footer-copy-symbol">&copy;</span> 2018 &mdash;2026 Autodhun
-            Digital India. All rights reserved. Crafted with excellence.
+            India. All rights reserved. Crafted with excellence.
           </p>
           <p>Inspired in India. Built for the world.</p>
         </div>

@@ -1,8 +1,6 @@
-import { ArrowRight } from "lucide-react";
-
 import { AboutSection } from "@/components/sections/about-section";
 import { FeaturedPressSection } from "@/components/sections/featured-press-section";
-import { FaqSection } from "@/components/sections/faq-section";
+import { HomeFaqSection } from "@/components/sections/home-faq-section";
 import { PreferredProviderSection } from "@/components/sections/preferred-provider-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { SectionPillHeading } from "@/components/sections/section-pill-heading";
@@ -45,7 +43,6 @@ export default function Home() {
                 variant="ghost"
               >
                 Get Started
-                <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
               </LinkButton>
               {/* <Link
                 className={`${navActionBtn} !h-11 w-full !rounded-full !px-6 border-0 bg-white text-sm text-[#0b0b0b] shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-[opacity,transform] hover:opacity-90 active:translate-y-px sm:!h-12 sm:w-auto sm:!px-8 sm:text-base`}
@@ -58,11 +55,11 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionPillHeading className="pt-5 pb-5 sm:pt-6 sm:pb-6" heading="Spotlight on Artists" />
+      <SectionPillHeading className="pt-5 pb-5 sm:pt-6 sm:pb-6" heading="Faces Behind the Music" />
 
       <PreferredProviderSection />
 
-      <SectionPillHeading className="pt-10 pb-6 sm:pt-12 sm:pb-8" heading="Testimonials" />
+      <SectionPillHeading className="pt-10 pb-6 sm:pt-12 sm:pb-8" heading="Trusted by Creators" />
 
       <TestimonialsSection />
 
@@ -74,7 +71,7 @@ export default function Home() {
 
       <AboutSection />
 
-      <FaqSection />
+      <HomeFaqSection />
     </div>
   );
 }

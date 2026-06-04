@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
+import { SiteBrandLogo } from "@/components/layout/site-brand-logo";
 import { MenuOverlay } from "@/components/navbar/MenuOverlay";
 
 import { cn } from "@/lib/utils";
@@ -142,15 +142,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
               >
                 <span className="footer-logo-mark max-[380px]:!h-[38px] max-[380px]:!w-[112px]">
-                  <Image
-                    alt="Autodhun Digital"
-                    className="h-auto w-full max-w-[134px]"
-                    height={46}
-                    priority
-                    src="/autodhun-logo.png"
-                    style={{ width: "auto", height: "auto" }}
-                    width={134}
-                  />
+                  <SiteBrandLogo width={134} height={46} />
                 </span>
               </Link>
             </div>

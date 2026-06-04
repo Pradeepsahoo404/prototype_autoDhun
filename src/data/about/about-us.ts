@@ -1,3 +1,5 @@
+import { siteImage } from "@/lib/site-images";
+
 /**
  * Copy for `/about/about-us`. Update here to change content site-wide.
  */
@@ -88,7 +90,7 @@ export const aboutUsContent = {
     mission: {
       paragraph:
         "AUTODHUN was created with a mission to transform the independent music ecosystem in India and beyond. We believe incredible talent exists everywhere — artists with passion, originality, and ambition who deserve access to the right opportunities, technology, and support systems. Our platform is built to empower creators with the tools, services, and global reach they need to grow independently and succeed on their own terms.",
-      imageSrc: "/About.png",
+      imageSrc: siteImage("About/About us", "Empowering the Future of Independent Music.png"),
       imageAlt: "Autodhun — mission and independent music ecosystem"
     },
     rights: {
@@ -97,7 +99,7 @@ export const aboutUsContent = {
         "AUTODHUN is a global music rights and distribution platform dedicated to empowering labels, artists, and rights owners in the evolving digital music ecosystem.",
         "AUTODHUN strongly supports independent and regional music labels by providing transparent licensing solutions, accurate royalty management, and worldwide monetization opportunities. From streaming services and public performances to radio, social platforms, and emerging AI-driven technologies, AUTODHUN helps rights holders maximize the value and reach of their music catalog globally."
       ],
-      imageSrc: "/Empowering Rights Holders in the Digital Music Era        .png",
+      imageSrc: siteImage("About/About us", "Empowering Rights Holders in the Digital Music Era.png"),
       imageAlt:
         "Empowering rights holders in the digital music era — global platform for labels, artists, and rights owners."
     }

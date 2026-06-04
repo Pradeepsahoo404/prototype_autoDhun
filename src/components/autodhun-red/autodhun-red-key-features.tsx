@@ -1,12 +1,9 @@
 import { AutodhunRedBentoCard } from "@/components/autodhun-red/autodhun-red-bento-card";
 import { FadeUp } from "@/components/services/fade-up";
+import { serviceBenefitsGridClass } from "@/components/services/service-benefits-shared";
 import { autodhunRedKeyFeaturesContent } from "@/data/autodhun-red/key-features";
-import { cn } from "@/lib/utils";
 
 const RED = "#e8222a";
-
-const gridClass =
-  "m-0 grid list-none grid-cols-1 gap-5 p-0 sm:gap-6 md:grid-cols-2 md:gap-7 lg:gap-8";
 
 function RedSectionAmbient() {
   return (
@@ -68,7 +65,7 @@ export function AutodhunRedKeyFeatures() {
           <KeyFeaturesHeader titleLine1={sectionTitleLine1} titleLine2={sectionTitleLine2} />
         </FadeUp>
 
-        <ul className={gridClass}>
+        <ul className={serviceBenefitsGridClass}>
           {items.map((item, index) => (
             <li key={item.id} className="min-w-0">
               <FadeUp delay={index * 0.06}>

@@ -17,7 +17,7 @@ export default function YoutubeContentIdOacCmsPage() {
   const { hero, visual, benefits } = youtubeContentIdOacCmsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <YoutubeContentIdOacCmsHero content={hero} />
       <YoutubeContentIdOacCmsVisualHighlight content={visual} />
       <YoutubeContentIdOacCmsBenefitsSection content={benefits} hideTopRule />

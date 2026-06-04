@@ -17,7 +17,7 @@ export default function GrowthMarketingToolsPage() {
   const { hero, visual, benefits } = growthMarketingToolsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <GrowthMarketingToolsHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <GrowthMarketingToolsBenefitsSection content={benefits} hideTopRule />

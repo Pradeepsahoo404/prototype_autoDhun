@@ -17,7 +17,7 @@ export default function GrowthMusicMarketingPage() {
   const { hero, visual, benefits } = growthMusicMarketingContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <GrowthMusicMarketingHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <GrowthMusicMarketingBenefitsSection content={benefits} hideTopRule />

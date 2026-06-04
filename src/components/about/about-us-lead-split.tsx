@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Image from "next/image";
+import { SiteImage } from "@/components/ui/site-image";
 import { motion, useReducedMotion } from "framer-motion";
 
 import type { AboutUsHeroContent, AboutUsLeadSplitContent } from "@/data/about/about-us";
@@ -36,7 +36,7 @@ const fadeUpItem = {
 };
 
 function publicImageSrc(src: string) {
-  return encodeURI(src);
+  return src;
 }
 
 function AboutLeadAmbient({ reduceMotion }: { reduceMotion: boolean }) {
@@ -142,7 +142,6 @@ function AboutLeadBackgroundMotion({ reduceMotion }: { reduceMotion: boolean }) 
 export function LeadImageCard({
   alt,
   className,
-  priority,
   reduceMotion,
   sizes,
   slideFrom,
@@ -150,7 +149,6 @@ export function LeadImageCard({
 }: {
   alt: string;
   className?: string;
-  priority?: boolean;
   reduceMotion: boolean;
   sizes: string;
   slideFrom: "left" | "right";
@@ -186,11 +184,10 @@ export function LeadImageCard({
           transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="relative z-[1] h-full w-full overflow-hidden rounded-[28px] bg-zinc-900/40 sm:rounded-[32px]">
-          <Image
+          <SiteImage
             alt={alt}
             className="object-cover object-center"
             fill
-            priority={priority}
             sizes={sizes}
             src={publicImageSrc(src)}
           />
@@ -318,7 +315,6 @@ export function AboutUsLeadSplit({
           <LeadImageCard
             alt={mission.imageAlt}
             className="mx-auto max-w-lg sm:max-w-none lg:mx-0"
-            priority
             reduceMotion={!!reduceMotion}
             sizes="(max-width: 1024px) 100vw, 50vw"
             slideFrom="right"
@@ -414,7 +410,6 @@ export function AboutUsSingleRowLead({
         <LeadImageCard
           alt={imageAlt}
           className="mx-auto max-w-lg sm:max-w-none lg:mx-0"
-          priority
           reduceMotion={!!reduceMotion}
           sizes="(max-width: 1024px) 100vw, 50vw"
           slideFrom="right"

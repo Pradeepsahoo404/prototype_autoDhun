@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Solutions/For Artists";
+
 export type ForArtistsBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const forArtistsContent = {
   },
   visual: {
     /** `public/for_artice.png` */
-    imageSrc: "/ForArtice.png",
+    imageSrc: siteImage(SECTION, "FOR ARTISTS banner.png"),
     imageAlt:
       "Publishing administration for artists: registration, rights, royalties, and reporting around a creator at a desk."
   },
@@ -56,7 +60,7 @@ export const forArtistsContent = {
         title: "Worldwide Music Distribution",
         description:
           "Release your music globally across all major streaming platforms with ease.",
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Worldwide Music Distribution"),
         imageAlt: "Music distribution hub with streaming platforms."
       },
       {
@@ -64,7 +68,7 @@ export const forArtistsContent = {
         title: "Keep 100% Ownership",
         description:
           "Maintain full rights and creative control over your music and content.",
-        imageSrc: "/Copyright%20Protection%20%20.png",
+        imageSrc: benefitImage(SECTION, "Keep 100% Ownership"),
         imageAlt: "Copyright and rights protection illustration."
       },
       {
@@ -72,7 +76,7 @@ export const forArtistsContent = {
         title: "Real-Time Analytics",
         description:
           "Track streams, audience insights, revenue growth, and performance in one place.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Real-Time Analytics"),
         imageAlt: "Analytics and performance insights illustration."
       },
       {
@@ -80,7 +84,7 @@ export const forArtistsContent = {
         title: "Fast & Transparent Payouts",
         description:
           "Receive secure worldwide payouts with clear royalty reporting and tracking.",
-        imageSrc: "/Artist%20Funding%20%20.png",
+        imageSrc: benefitImage(SECTION, "Fast & Transparent Payouts"),
         imageAlt: "Artist funding and payout illustration."
       }
     ] satisfies ForArtistsBenefit[]

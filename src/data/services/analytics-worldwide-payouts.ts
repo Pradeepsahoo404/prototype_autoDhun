@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "services/Analytics & Worldwide Payouts";
+
 export type AnalyticsWorldwidePayoutsBenefit = {
   id: string;
   title: string;
@@ -42,7 +46,7 @@ export const analyticsWorldwidePayoutsContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+    imageSrc: siteImage(SECTION, "Analytics & Worldwide Payouts banner.png"),
     imageAlt: "Hand holding cash representing analytics and worldwide payouts."
   },
   benefits: {
@@ -54,7 +58,7 @@ export const analyticsWorldwidePayoutsContent = {
         title: "Real-Time Performance Insights",
         description:
           "Track streams, revenue, audience growth, and catalog performance with advanced analytics.",
-        imageSrc: "/Marketing%20Tools.png",
+        imageSrc: benefitImage(SECTION, "Real-Time Performance Insights"),
         imageAlt: "Marketing tools illustration used as an analytics visual."
       },
       {
@@ -62,7 +66,7 @@ export const analyticsWorldwidePayoutsContent = {
         title: "Global Payment Distribution",
         description:
           "Send secure and reliable payouts to artists and rights holders worldwide.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Global Payment Distribution"),
         imageAlt: "Cash illustration representing worldwide payouts."
       },
       {
@@ -70,7 +74,7 @@ export const analyticsWorldwidePayoutsContent = {
         title: "Transparent Revenue Reporting",
         description:
           "Access detailed financial reports and earnings breakdowns with complete clarity.",
-        imageSrc: "/Purpose.png",
+        imageSrc: benefitImage(SECTION, "Transparent Revenue Reporting"),
         imageAlt: "Purpose illustration used as a reporting visual."
       },
       {
@@ -78,7 +82,7 @@ export const analyticsWorldwidePayoutsContent = {
         title: "Data-Driven Growth Decisions",
         description:
           "Identify trends, opportunities, and market performance to grow strategically.",
-        imageSrc: "/Future.png",
+        imageSrc: benefitImage(SECTION, "Data-Driven Growth Decisions"),
         imageAlt: "Future illustration used as a growth visual."
       },
       // {

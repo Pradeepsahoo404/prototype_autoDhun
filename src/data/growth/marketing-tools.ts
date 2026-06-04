@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Growth/Marketing Tools";
+
 export type GrowthMarketingToolsBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const growthMarketingToolsContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    imageSrc: "/Marketing%20Tools.png",
+    imageSrc: siteImage(SECTION, "Marketing Tools banner.png"),
     imageAlt:
       "Marketing partnership illustration: handshake, puzzle pieces, calendar, revenue, growth chart, and target icons on a dark background."
   },
@@ -56,7 +60,7 @@ export const growthMarketingToolsContent = {
         title: "Targeted Audience Growth",
         description:
           "Reach the right listeners through data-driven marketing strategies and audience targeting.",
-        imageSrc: "/Future.png",
+        imageSrc: benefitImage(SECTION, "Targeted Audience Growth"),
         imageAlt: "Growth and future-forward marketing illustration."
       },
       {
@@ -64,7 +68,7 @@ export const growthMarketingToolsContent = {
         title: "Social Media Promotion",
         description:
           "Boost visibility across Instagram, YouTube, TikTok, Facebook, and other major platforms.",
-        imageSrc: "/Music%20Marketing%20.png",
+        imageSrc: benefitImage(SECTION, "Social Media Promotion"),
         imageAlt: "Music marketing and social promotion illustration."
       },
       {
@@ -72,7 +76,7 @@ export const growthMarketingToolsContent = {
         title: "Playlist & Campaign Support",
         description:
           "Increase streams and engagement with curated playlist pitching and promotional campaigns.",
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Playlist & Campaign Support"),
         imageAlt: "Distribution and playlist campaign illustration."
       },
       {
@@ -80,7 +84,7 @@ export const growthMarketingToolsContent = {
         title: "Real-Time Performance Tracking",
         description:
           "Monitor campaign results, audience behavior, and engagement analytics in one place.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Real-Time Performance Tracking"),
         imageAlt: "Analytics and performance tracking illustration."
       }
     ] satisfies GrowthMarketingToolsBenefit[]

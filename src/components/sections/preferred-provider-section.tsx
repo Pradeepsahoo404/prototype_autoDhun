@@ -1,47 +1,18 @@
-import Image from "next/image";
+"use client";
+
+import { SiteImage } from "@/components/ui/site-image";
 import type { ReactNode } from "react";
 
+import { SectionLoader } from "@/components/ui/section-loader";
+import { useApiOrFallback } from "@/lib/api-section";
+import { fallbackWallColumns, groupTeamMembersByColumn } from "@/lib/team-wall";
 import { cn } from "@/lib/utils";
+import { useGetTeamMembersQuery } from "@/store/api/autodhunApi";
 
 /** Matches reference `.h-xl` / `.h-md` */
 const H_XL = 420;
 const H_MD = 260;
 const RADIUS = 24;
-
-const portraits: { src: string; alt: string }[] = [
-  {
-    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1539578708518-745b6b5e7c97?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85",
-    alt: "Artist portrait",
-  },
-];
 
 /** Delicate white spirograph / wave orbit behind the green card (reference UI). */
 function WaveOrbitGraphic({ className }: { className?: string }) {
@@ -112,7 +83,7 @@ function PortraitCard({
       )}
       style={{ height: heightPx, borderRadius: RADIUS }}
     >
-      <Image
+      <SiteImage
         alt={alt}
         className="object-cover transition-transform duration-[400ms] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-[1.04]"
         fill
@@ -180,7 +151,25 @@ function WallColumn({
 }
 
 export function PreferredProviderSection() {
-  const [a, b, c, d, e, f, g, h] = portraits;
+  const query = useGetTeamMembersQuery();
+  const { value: columns, isLoading } = useApiOrFallback(
+    query,
+    (d) => groupTeamMembersByColumn(d.members),
+    fallbackWallColumns()
+  );
+
+  if (isLoading) {
+    return (
+      <section
+        aria-labelledby="preferred-provider-heading"
+        className="section wall-of-love-section overflow-x-hidden bg-black pb-12 pt-4 text-white sm:pb-14 sm:pt-5 md:pb-[4.25rem] md:pt-6 lg:pb-20 lg:pt-8"
+      >
+        <SectionLoader label="Loading portraits…" minHeight="min-h-[420px]" />
+      </section>
+    );
+  }
+
+  const { col1, col3, col4, col5, col6 } = columns;
 
   return (
     <section
@@ -195,35 +184,37 @@ export function PreferredProviderSection() {
         <div className="wall-of-love-wrapper mx-auto flex w-full max-w-[1600px] flex-wrap items-center justify-center gap-[20px] p-[20px] lg:flex-nowrap">
           {/* Column 1 — two `.artist-card.h-md` */}
           <WallColumn>
-            <PortraitCard alt={a.alt} heightPx={H_MD} src={a.src} />
-            <PortraitCard alt={b.alt} heightPx={H_MD} src={b.src} />
+            {col1.map((p) => (
+              <PortraitCard key={p.id} alt={p.alt} heightPx={p.heightPx} src={p.src} />
+            ))}
           </WallColumn>
 
-          {/* Column 2 — one `.artist-card.h-xl` (branded tile; reference uses a single tall image) */}
           <WallColumn>
             <PreferredProviderCard />
           </WallColumn>
 
-          {/* Column 3 — two `.artist-card.h-md` */}
           <WallColumn>
-            <PortraitCard alt={c.alt} heightPx={H_MD} src={c.src} />
-            <PortraitCard alt={d.alt} heightPx={H_MD} src={d.src} />
+            {col3.map((p) => (
+              <PortraitCard key={p.id} alt={p.alt} heightPx={p.heightPx} src={p.src} />
+            ))}
           </WallColumn>
 
-          {/* Column 4 — one `.artist-card.h-xl` */}
           <WallColumn>
-            <PortraitCard alt={e.alt} heightPx={H_XL} src={e.src} />
+            {col4.map((p) => (
+              <PortraitCard key={p.id} alt={p.alt} heightPx={p.heightPx} src={p.src} />
+            ))}
           </WallColumn>
 
-          {/* Column 5 — two `.artist-card.h-md` */}
           <WallColumn>
-            <PortraitCard alt={f.alt} heightPx={H_MD} src={f.src} />
-            <PortraitCard alt={g.alt} heightPx={H_MD} src={g.src} />
+            {col5.map((p) => (
+              <PortraitCard key={p.id} alt={p.alt} heightPx={p.heightPx} src={p.src} />
+            ))}
           </WallColumn>
 
-          {/* Column 6 — one `.artist-card.h-xl` */}
           <WallColumn>
-            <PortraitCard alt={h.alt} heightPx={H_XL} src={h.src} />
+            {col6.map((p) => (
+              <PortraitCard key={p.id} alt={p.alt} heightPx={p.heightPx} src={p.src} />
+            ))}
           </WallColumn>
         </div>
       </div>

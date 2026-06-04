@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-
 import { LinkButton } from "@/components/ui/button";
 import type { MusicDistributionHeroContent } from "@/data/services/music-distribution";
 
@@ -54,7 +52,6 @@ export function HeroService({ content, className }: HeroServiceProps) {
                 variant="ghost"
               >
                 {primaryCta.label}
-                <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
               </LinkButton>
               {/* View Pricing — secondary CTA
               <Link

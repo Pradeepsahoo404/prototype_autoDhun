@@ -27,13 +27,13 @@ const defaultItems: FaqItem[] = [
   },
   {
     id: "autodhun-distribution",
-    question: "How does Autodhun Digital distribution work?",
+    question: "How does Autodhun distribution work?",
     answer:
       "You upload your release once, we prepare and deliver it to major streaming platforms, and you track performance and earnings through your dashboard."
   },
   {
     id: "grow-music",
-    question: "How can Autodhun Digital help grow my music?",
+    question: "How can Autodhun help grow my music?",
     answer:
       "We support releases with the right platform coverage, metadata, and optional marketing tools so your music can reach more listeners consistently."
   },
@@ -57,13 +57,13 @@ const defaultItems: FaqItem[] = [
   },
   {
     id: "music-videos",
-    question: "Can Autodhun Digital distribute my music videos?",
+    question: "Can Autodhun distribute my music videos?",
     answer:
       "We can help you prepare video assets and deliver them to supported video platforms depending on your release plan."
   },
   {
     id: "sync",
-    question: "What is sync licensing and how does Autodhun Digital help?",
+    question: "What is sync licensing and how does Autodhun help?",
     answer:
       "Sync licensing places your music in films, ads, and content. We help with rights readiness and matching opportunities when available."
   },
@@ -80,7 +80,7 @@ export function FaqSection({
   kicker = "FAQS",
   titleLine1 = "YOUR MUSIC QUESTIONS ,",
   titleLine2 = "ANSWERED",
-  subtitle = "Unlock Everything About Autodhun Digital",
+  subtitle = "Unlock Everything About Autodhun",
   variant = "default"
 }: FaqSectionProps) {
   const [openId, setOpenId] = useState<string | null>(null);

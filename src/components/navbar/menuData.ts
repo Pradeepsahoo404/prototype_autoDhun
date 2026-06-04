@@ -1,3 +1,5 @@
+import { navImages } from "@/lib/site-images";
+
 export type NavSubmenuItem = {
   title: string;
   href: string;
@@ -18,8 +20,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "home",
     title: "Home",
     href: "/",
-    image:
-      "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.home,
     imageAlt: "City skyline at dusk",
     description: "Return to the home experience."
   },
@@ -27,9 +28,8 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "about",
     title: "About",
     href: "/about",
-    image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Team outdoors in natural light",
+    image: navImages.about,
+    imageAlt: "Autodhun brand identity — logo grid",
     description: "Who we are and how we work with creators.",
     submenu: [
       { title: "About Us", href: "/about/about-us" },
@@ -41,8 +41,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "services",
     title: "Services",
     href: "/services",
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85",
+    image: navImages.services,
     imageAlt: "Modern architecture at dusk",
     description: "Distribution, protection, and premium delivery for your music.",
     submenu: [
@@ -57,8 +56,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "solutions",
     title: "Solutions",
     href: "/solutions",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.solutions,
     imageAlt: "Creative team collaborating",
     description: "Programs built for artists, labels, and partners.",
     submenu: [
@@ -71,8 +69,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "publishing",
     title: "Publishing",
     href: "/publishing",
-    image:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.publishing,
     imageAlt: "Studio mixing desk",
     description: "Administration and sync opportunities for your catalog.",
     submenu: [
@@ -85,8 +82,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "growth",
     title: "Growth",
     href: "/growth",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.growth,
     imageAlt: "Marketing analytics workspace",
     description: "Marketing, promotion, and funding to grow your reach.",
     submenu: [
@@ -109,8 +105,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "autodhun-red",
     title: "Autodhun Red",
     href: "/autodhun-red",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57f91?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.autodhunRed,
     imageAlt: "Bold red abstract gradient",
     description: "The Autodhun Red experience."
   },
@@ -118,8 +113,7 @@ export const mainNavigation: NavMenuEntry[] = [
     id: "get-in-touch",
     title: "Get in Touch",
     href: "/get-in-touch",
-    image:
-      "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1600&q=80",
+    image: navImages.getInTouch,
     imageAlt: "Contact and communication",
     description: "Reach our team for partnerships and support."
   }

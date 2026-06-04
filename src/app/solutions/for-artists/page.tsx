@@ -17,7 +17,7 @@ export default function ForArtistsPage() {
   const { hero, visual, benefits } = forArtistsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <ForArtistsHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <ForArtistsBenefitsSection content={benefits} hideTopRule />

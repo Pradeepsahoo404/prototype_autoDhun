@@ -17,7 +17,7 @@ export default function PublishingSyncForSupervisorsPage() {
   const { hero, visual, benefits } = publishingSyncForSupervisorsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <PublishingSyncForSupervisorsHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <PublishingSyncForSupervisorsBenefitsSection content={benefits} hideTopRule />

@@ -1,6 +1,6 @@
 export const featuredPressContent = {
-  titleLine1: "Autodhun Digital – Crafting a Premium",
-  titleLine2: "Digital Experience"
+  titleLine1: "AUTODHUN – CRAFTING A PREMIUM",
+  titleLine2: "DIGITAL EXPERIENCE"
 } as const;
 
 /** Replace these paths in `public/press/` when final logo PNGs are ready. */

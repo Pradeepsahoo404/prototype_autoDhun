@@ -17,7 +17,7 @@ export default function PublishingSyncForArtistsPage() {
   const { hero, visual, benefits } = publishingSyncForArtistsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <PublishingSyncForArtistsHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <PublishingSyncForArtistsBenefitsSection content={benefits} hideTopRule />

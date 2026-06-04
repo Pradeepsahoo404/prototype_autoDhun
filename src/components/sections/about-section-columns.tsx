@@ -7,7 +7,7 @@ type AboutSectionColumnsProps = {
   className?: string;
   imageSrc: string;
   imageAlt: string;
-  youtubeVideoId?: string;
+  videoSrc?: string;
   children: ReactNode;
 };
 
@@ -15,7 +15,7 @@ export function AboutSectionColumns({
   className,
   imageSrc,
   imageAlt,
-  youtubeVideoId,
+  videoSrc,
   children,
 }: AboutSectionColumnsProps) {
   return (
@@ -26,7 +26,7 @@ export function AboutSectionColumns({
       )}
     >
       <div className="relative w-full min-w-0 self-start lg:mx-0">
-        <AboutSectionMedia imageAlt={imageAlt} imageSrc={imageSrc} youtubeVideoId={youtubeVideoId} />
+        <AboutSectionMedia imageAlt={imageAlt} imageSrc={imageSrc} videoSrc={videoSrc} />
       </div>
 
       <div className="flex min-w-0 w-full flex-col text-left lg:max-w-none">{children}</div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { Star } from "lucide-react";
-import Image from "next/image";
 import {
   useCallback,
   useEffect,
@@ -11,17 +10,19 @@ import {
   type RefObject,
 } from "react";
 
+import { SectionLoader } from "@/components/ui/section-loader";
+import { useApiOrFallback } from "@/lib/api-section";
+import { homeImages } from "@/lib/site-images";
 import { cn } from "@/lib/utils";
+import { SiteImage } from "@/components/ui/site-image";
 
-type Testimonial = {
-  id: string;
-  quote: string;
-  name: string;
-  role: string;
-  avatarSrc?: string;
-};
+const TESTIMONIALS_SIDE_IMAGE_SRC = homeImages.testimonials;
+import { useGetTestimonialsQuery } from "@/store/api/autodhunApi";
+import type { TestimonialDto } from "@/types/api";
 
-const ITEMS: Testimonial[] = [
+type Testimonial = TestimonialDto;
+
+export const FALLBACK_TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     quote:
@@ -60,31 +61,66 @@ const ITEMS: Testimonial[] = [
   },
 ];
 
-const N = ITEMS.length;
-/** [clone last, …items, clone first] — enables seamless wrap in the carousel */
-const LOOP_SLIDES: Testimonial[] = [ITEMS[N - 1]!, ...ITEMS, ITEMS[0]!];
+function buildLoopSlides(items: Testimonial[]) {
+  const n = items.length;
+  if (n === 0) return [];
+  return [items[n - 1]!, ...items, items[0]!];
+}
 
-const AUTO_MS = 4500;
+const AUTO_MS = 2800;
+const SLIDE_TRANSITION_MS = 480;
 const SNIP_LEN = 148;
+const VISIBLE_CARDS = 3;
+const CAROUSEL_GAP = 14;
+
+/** Fit exactly 3 cards in the track on md+; 1 centered card on small screens. */
+function getCarouselLayout(vw: number) {
+  if (vw < 600) {
+    const card = Math.min(300, Math.max(260, vw - 32));
+    return {
+      card,
+      gap: CAROUSEL_GAP,
+      pad: Math.max(16, (vw - card) / 2)
+    };
+  }
+
+  const gaps = VISIBLE_CARDS - 1;
+  const card = Math.max(
+    200,
+    Math.min(328, Math.floor((vw - CAROUSEL_GAP * gaps) / VISIBLE_CARDS))
+  );
+
+  const track = VISIBLE_CARDS * card + gaps * CAROUSEL_GAP;
+  const pad = Math.max(CAROUSEL_GAP, (vw - track) / 2);
+
+  return { card, gap: CAROUSEL_GAP, pad };
+}
 
 function useViewportWidth(ref: RefObject<HTMLElement | null>) {
   const [w, setW] = useState(0);
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => setW(el.clientWidth));
+
+    const measure = () => {
+      const width = el.clientWidth;
+      if (width > 0) setW(width);
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
     ro.observe(el);
-    setW(el.clientWidth);
-    return () => ro.disconnect();
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [ref]);
   return w;
 }
 
 const LEMON_RGB = "132,235,12";
 
-/** Public asset — filename includes spaces (`Music Distribution .png`) */
-const TESTIMONIALS_SIDE_IMAGE_SRC =
-  "/Music%20Distribution%20.png" as const;
 
 /** Horizontal stock + EQ toward mic — primary / lemon */
 function SliderToMicConnector({ className }: { className?: string }) {
@@ -139,7 +175,7 @@ function TestimonialsRightFigure({ showConnector }: { showConnector: boolean }) 
             aria-hidden
             className="testimonials-side-media__corner testimonials-side-media__corner--bl"
           />
-          <Image
+          <SiteImage
             alt="Music distribution graphic with platform icons"
             className="relative z-[1] h-auto w-full object-contain p-4"
             height={800}
@@ -228,7 +264,7 @@ function TestimonialCard({
       <div className="relative z-[1] mt-4 flex items-center gap-3">
         <div className="relative size-11 shrink-0 overflow-hidden rounded-full bg-zinc-800 ring-1 ring-[rgba(132,235,12,0.45)]">
           {item.avatarSrc ? (
-            <Image
+            <SiteImage
               alt=""
               className="object-cover"
               fill
@@ -257,16 +293,25 @@ function TestimonialCard({
   );
 }
 
-/** Active dot index 0..N-1 from loop slide index */
-function slideIndexToDot(slideIndex: number) {
-  if (slideIndex === 0) return N - 1;
-  if (slideIndex === N + 1) return 0;
+/** Active dot index 0..n-1 from loop slide index */
+function slideIndexToDot(slideIndex: number, n: number) {
+  if (slideIndex === 0) return n - 1;
+  if (slideIndex === n + 1) return 0;
   return slideIndex - 1;
 }
 
 export function TestimonialsSection({ className }: { className?: string }) {
+  const query = useGetTestimonialsQuery();
+  const { value: items, isLoading } = useApiOrFallback(
+    query,
+    (d) => d.testimonials,
+    FALLBACK_TESTIMONIALS
+  );
+  const n = items.length;
+  const loopSlides = buildLoopSlides(items);
+
   const viewportRef = useRef<HTMLDivElement>(null);
-  const vw = useViewportWidth(viewportRef);
+  const measuredVw = useViewportWidth(viewportRef);
   const [slideIndex, setSlideIndex] = useState(1);
   const [noTransition, setNoTransition] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -282,74 +327,106 @@ export function TestimonialsSection({ className }: { className?: string }) {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
+  /** Keep loop index valid when API data replaces fallback (different length). */
+  useEffect(() => {
+    setSlideIndex(1);
+    setExpandedId(null);
+    jumpLock.current = false;
+    setNoTransition(false);
+  }, [n, items.map((t) => t.id).join("|")]);
+
   const advance = useCallback(() => {
-    if (jumpLock.current) return;
+    if (jumpLock.current || n === 0) return;
     setExpandedId(null);
     setSlideIndex((s) => {
       if (reduceMotion) {
-        if (s < 1 || s > N) return 1;
-        return s + 1 > N ? 1 : s + 1;
+        if (s < 1 || s > n) return 1;
+        return s + 1 > n ? 1 : s + 1;
       }
-      if (s === 0 || s === N + 1) return s;
-      if (s === N) return N + 1;
+      if (s === 0 || s === n + 1) return s;
+      if (s === n) return n + 1;
       return s + 1;
     });
-  }, [reduceMotion]);
+  }, [reduceMotion, n]);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (n < 2) return;
     if (paused) return;
     const id = window.setInterval(advance, AUTO_MS);
     return () => window.clearInterval(id);
-  }, [advance, paused, reduceMotion]);
+  }, [advance, paused, n]);
 
   const goToSlide = useCallback((dotIndex: number) => {
     setExpandedId(null);
     setSlideIndex(dotIndex + 1);
   }, []);
 
-  const handleTransitionEnd = useCallback(
-    (e: React.TransitionEvent<HTMLDivElement>) => {
-      if (reduceMotion) return;
-      if (e.propertyName !== "transform") return;
-      if (jumpLock.current) return;
-      if (slideIndex === N + 1) {
-        jumpLock.current = true;
-        setNoTransition(true);
-        setSlideIndex(1);
+  const resetCloneSlide = useCallback(
+    (target: number) => {
+      jumpLock.current = true;
+      setNoTransition(true);
+      setSlideIndex(target);
+      requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            setNoTransition(false);
-            jumpLock.current = false;
-          });
+          setNoTransition(false);
+          jumpLock.current = false;
         });
-      } else if (slideIndex === 0) {
-        jumpLock.current = true;
-        setNoTransition(true);
-        setSlideIndex(N);
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            setNoTransition(false);
-            jumpLock.current = false;
-          });
-        });
-      }
+      });
     },
-    [reduceMotion, slideIndex]
+    []
   );
 
-  /** Fixed card widths per coarse viewport bucket (not fluid per-pixel) */
-  const GAP = 12;
-  const CARD =
-    vw > 0 ? (vw < 480 ? 260 : vw < 768 ? 276 : vw < 1024 ? 292 : 308) : 280;
-  const pad = vw > 0 ? Math.max(8, (vw - CARD) / 2) : 16;
+  const handleTransitionEnd = useCallback(
+    (e: React.TransitionEvent<HTMLDivElement>) => {
+      if (e.propertyName !== "transform") return;
+      if (jumpLock.current) return;
+      if (slideIndex === n + 1) resetCloneSlide(1);
+      else if (slideIndex === 0) resetCloneSlide(n);
+    },
+    [slideIndex, n, resetCloneSlide]
+  );
 
-  const translate =
-    vw > 0
-      ? -(pad + slideIndex * (CARD + GAP) + CARD / 2 - vw / 2)
-      : 0;
+  /** If transform does not animate (same px), still reset infinite-loop clones. */
+  useEffect(() => {
+    if (n < 2) return;
+    if (slideIndex !== n + 1 && slideIndex !== 0) return;
+    const t = window.setTimeout(() => {
+      if (jumpLock.current) return;
+      if (slideIndex === n + 1) resetCloneSlide(1);
+      else if (slideIndex === 0) resetCloneSlide(n);
+    }, SLIDE_TRANSITION_MS + 80);
+    return () => window.clearTimeout(t);
+  }, [slideIndex, n, resetCloneSlide]);
 
-  const dotActive = slideIndexToDot(slideIndex);
+  const vw =
+    measuredVw > 0
+      ? measuredVw
+      : typeof window !== "undefined"
+        ? Math.min(Math.max(window.innerWidth - 96, 320), 1024)
+        : 360;
+  const { card: CARD, gap: GAP, pad } = getCarouselLayout(vw);
+
+  const translate = -(pad + slideIndex * (CARD + GAP) + CARD / 2 - vw / 2);
+
+  const dotActive = n > 0 ? slideIndexToDot(slideIndex, n) : 0;
+
+  if (isLoading) {
+    return (
+      <section
+        className={cn(
+          "relative w-full overflow-x-clip bg-black pb-14 pt-3 text-white lg:pb-16 lg:pt-4",
+          className
+        )}
+        aria-label="Trusted by Creators"
+      >
+        <SectionLoader label="Loading testimonials…" minHeight="min-h-[360px]" />
+      </section>
+    );
+  }
+
+  if (n === 0) {
+    return null;
+  }
 
   return (
     <section
@@ -357,9 +434,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
         "relative w-full overflow-x-clip overflow-y-visible bg-black pb-14 pt-3 text-white lg:pb-16 lg:pt-4",
         className
       )}
-      aria-label="Testimonials"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      aria-label="Trusted by Creators"
     >
       <div className="pointer-events-none absolute inset-0 opacity-30">
         <div
@@ -386,30 +461,38 @@ export function TestimonialsSection({ className }: { className?: string }) {
 
             <div
               ref={viewportRef}
-              className="relative overflow-x-hidden overflow-y-visible py-8"
+              className="relative mx-auto w-full max-w-[64rem] overflow-x-hidden overflow-y-visible py-8"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
             >
               <div
                 className={cn(
-                  "flex",
-                  reduceMotion || noTransition
+                  "flex ease-out",
+                  noTransition
                     ? ""
-                    : "transition-[transform] duration-[620ms] ease-out"
+                    : reduceMotion
+                      ? "transition-[transform] duration-200"
+                      : "transition-[transform]"
                 )}
                 style={{
                   gap: GAP,
                   paddingLeft: pad,
                   paddingRight: pad,
                   transform: `translate3d(${translate}px,0,0)`,
+                  transitionDuration: noTransition || reduceMotion ? undefined : `${SLIDE_TRANSITION_MS}ms`,
                 }}
                 onTransitionEnd={handleTransitionEnd}
               >
-                {LOOP_SLIDES.map((item, i) => {
+                {loopSlides.map((item, i) => {
                   const active = i === slideIndex;
                   const key = `loop-${i}-${item.id}`;
                   return (
                     <div
                       key={key}
-                      className="flex shrink-0 items-stretch justify-center"
+                      className={cn(
+                        "flex shrink-0 items-stretch justify-center transition-[transform,z-index] duration-500 ease-out",
+                        active ? "z-20" : "z-0"
+                      )}
                       style={{ width: CARD }}
                     >
                       <TestimonialCard
@@ -432,7 +515,7 @@ export function TestimonialsSection({ className }: { className?: string }) {
               className="mt-4 flex justify-center gap-2"
               aria-label="Choose testimonial"
             >
-              {ITEMS.map((item, i) => {
+              {items.map((item, i) => {
                 const on = i === dotActive;
                 return (
                   <button

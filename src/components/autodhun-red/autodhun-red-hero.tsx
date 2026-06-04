@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-
 import { AutodhunRedVisual } from "@/components/autodhun-red/autodhun-red-visual";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -54,7 +52,6 @@ export function AutodhunRedHero() {
               variant="ghost"
             >
               BECOME A MEMBER
-              <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
             </LinkButton>
           </div>
 

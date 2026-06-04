@@ -17,7 +17,7 @@ export default function GrowthArtistFundingPage() {
   const { hero, visual, benefits } = growthArtistFundingContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <GrowthArtistFundingHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <GrowthArtistFundingBenefitsSection content={benefits} hideTopRule />

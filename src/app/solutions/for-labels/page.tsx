@@ -17,7 +17,7 @@ export default function ForLabelsPage() {
   const { hero, visual, benefits } = forLabelsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <ForLabelsHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <ForLabelsBenefitsSection content={benefits} hideTopRule />

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SiteImage } from "@/components/ui/site-image";
 
 import { cn } from "@/lib/utils";
 
@@ -141,7 +141,7 @@ export function ServiceBenefitsBentoCard({
           height: "clamp(190px, 40vw, 226px)"
         }}
       >
-        <Image
+        <SiteImage
           alt={imageAlt}
           className="object-contain object-bottom-right drop-shadow-[0_12px_32px_rgba(0,0,0,0.55)]"
           fill

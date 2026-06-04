@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Solutions/For Labels";
+
 export type ForLabelsBenefit = {
   id: string;
   title: string;
@@ -42,10 +46,9 @@ export const forLabelsContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    /** `public/For Labels.png` */
-    imageSrc: "/For_Label.png",
+    imageSrc: siteImage(SECTION, "FOR LABELS banner.png"),
     imageAlt:
-      "Label hub graphic: central label node connected to Spotify, Apple Music, and Amazon Music on a dark grid."
+      "Artist holding a vinyl record and sleeve against a black background."
   },
   benefits: {
     sectionTitleLine1: "Run Your Label.",
@@ -56,7 +59,7 @@ export const forLabelsContent = {
         title: "Complete Catalog Control",
         description:
           "Manage releases, metadata, artists, and music assets from one centralized platform.",
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Complete Catalog Control"),
         imageAlt: "Music distribution and catalog hub illustration."
       },
       {
@@ -64,7 +67,7 @@ export const forLabelsContent = {
         title: "Global Distribution Reach",
         description:
           "Deliver music worldwide across major streaming services and digital platforms seamlessly.",
-        imageSrc: "/For%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Global Distribution Reach"),
         imageAlt: "Global distribution and platform reach illustration."
       },
       {
@@ -72,7 +75,7 @@ export const forLabelsContent = {
         title: "Advanced Analytics & Insights",
         description:
           "Track streams, audience growth, earnings, and performance with real-time reporting tools.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Advanced Analytics & Insights"),
         imageAlt: "Analytics and performance reporting illustration."
       },
       {
@@ -80,7 +83,7 @@ export const forLabelsContent = {
         title: "Automated Royalties & Payouts",
         description:
           "Simplify royalty management, revenue splits, and worldwide payouts with transparent automation.",
-        imageSrc: "/Publishing%20%20Administration.png",
+        imageSrc: benefitImage(SECTION, "Automated Royalties & Payouts"),
         imageAlt: "Rights, royalties, and administration illustration."
       }
     ] satisfies ForLabelsBenefit[]

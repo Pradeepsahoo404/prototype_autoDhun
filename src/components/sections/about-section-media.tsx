@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import { SiteImage } from "@/components/ui/site-image";
+import { siteVideos } from "@/lib/site-images";
 import { X } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
-
-/** Public sample embed — swap for your real Autodhun trailer when ready. */
-const DEFAULT_YOUTUBE_ID = "M7lc1UVf-VE";
 
 const DIALOG_TITLE_ID = "about-video-dialog-title";
 
@@ -22,17 +20,18 @@ function PlayGlyph({ className }: { className?: string }) {
 type AboutSectionMediaProps = {
   imageSrc: string;
   imageAlt: string;
-  youtubeVideoId?: string;
+  videoSrc?: string;
   className?: string;
 };
 
 export function AboutSectionMedia({
   imageSrc,
   imageAlt,
-  youtubeVideoId = DEFAULT_YOUTUBE_ID,
+  videoSrc = siteVideos.intro,
   className,
 }: AboutSectionMediaProps) {
   const [open, setOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
@@ -49,6 +48,21 @@ export function AboutSectionMedia({
     };
   }, [open, close]);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (open) {
+      void video.play().catch(() => {
+        /* autoplay may be blocked until user gesture — play button click satisfies this */
+      });
+      return;
+    }
+
+    video.pause();
+    video.currentTime = 0;
+  }, [open]);
+
   return (
     <>
       <div
@@ -58,14 +72,14 @@ export function AboutSectionMedia({
           className
         )}
       >
-        <Image alt={imageAlt} className="object-cover" fill priority={false} sizes="(max-width: 1024px) 100vw, 48vw" src={imageSrc} />
+        <SiteImage alt={imageAlt} className="object-cover" fill sizes="(max-width: 1024px) 100vw, 48vw" src={imageSrc} />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20" />
         <div className="absolute inset-0 flex items-center justify-center p-4">
           <button
             suppressHydrationWarning
             aria-expanded={open}
             aria-haspopup="dialog"
-            aria-label="Play video about Autodhun Digital"
+            aria-label="Play video about Autodhun"
             className="group relative flex size-[4.5rem] shrink-0 cursor-pointer items-center justify-center sm:size-[5.25rem]"
             type="button"
             onClick={() => setOpen(true)}
@@ -106,7 +120,7 @@ export function AboutSectionMedia({
           />
           <div className="relative z-[1] w-full max-w-5xl">
             <p className="sr-only" id={DIALOG_TITLE_ID}>
-              About Autodhun Digital — sample video
+              About Autodhun — intro video
             </p>
             <button
               aria-label="Close"
@@ -117,12 +131,14 @@ export function AboutSectionMedia({
               <X aria-hidden className="size-5" strokeWidth={2} />
             </button>
             <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
-              <iframe
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full"
-                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&playsinline=1`}
-                title="About Autodhun Digital — sample video"
+              <video
+                ref={videoRef}
+                className="absolute inset-0 h-full w-full bg-black object-contain"
+                controls
+                playsInline
+                preload="metadata"
+                src={videoSrc}
+                title="About Autodhun — intro video"
               />
             </div>
           </div>

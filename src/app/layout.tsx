@@ -3,7 +3,9 @@ import { Barlow } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/navbar/Navbar";
+import { StoreProvider } from "@/components/providers/store-provider";
 import { siteConfig } from "@/config/site";
+import { fetchSiteBranding } from "@/lib/fetch-site-branding";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
@@ -38,11 +40,13 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialSiteBranding = await fetchSiteBranding();
+
   return (
     <html className={barlow.variable} lang="en" suppressHydrationWarning>
       <head>
@@ -52,9 +56,11 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
-        <Navbar />
-        <main className="min-w-0 max-w-[100vw] overflow-x-clip">{children}</main>
-        <Footer />
+        <StoreProvider initialSiteBranding={initialSiteBranding ?? undefined}>
+          <Navbar />
+          <main className="min-w-0 max-w-[100vw] overflow-x-clip">{children}</main>
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

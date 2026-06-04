@@ -1,10 +1,44 @@
-import Image from "next/image";
+"use client";
 
+import { SiteImage } from "@/components/ui/site-image";
+
+import { SectionLoader } from "@/components/ui/section-loader";
 import { featuredPressContent, featuredPressLogos } from "@/data/home/featured-press";
+import { useApiOrFallback } from "@/lib/api-section";
 import { cn } from "@/lib/utils";
+import { useGetFeaturedPressQuery } from "@/store/api/autodhunApi";
+import type { FeaturedPressDto, PressLogoDto } from "@/types/api";
 
 export function FeaturedPressSection({ className }: { className?: string }) {
-  const { titleLine1, titleLine2 } = featuredPressContent;
+  const query = useGetFeaturedPressQuery();
+
+  const { value: press, isLoading } = useApiOrFallback(
+    query,
+    (d) => d,
+    {
+      content: featuredPressContent,
+      logos: [...featuredPressLogos] as PressLogoDto[]
+    } satisfies FeaturedPressDto
+  );
+
+  const titleLine1 = press.content.titleLine1;
+  const titleLine2 = press.content.titleLine2;
+  const logos = press.logos;
+  const marqueeLogos = [...logos, ...logos, ...logos];
+
+  if (isLoading) {
+    return (
+      <section
+        aria-label="Featured in press and industry publications"
+        className={cn(
+          "relative w-full min-w-0 overflow-x-clip border-0 bg-black py-12 text-white sm:py-14 md:py-16 lg:py-20",
+          className
+        )}
+      >
+        <SectionLoader label="Loading featured press…" minHeight="min-h-[220px]" />
+      </section>
+    );
+  }
 
   return (
     <section
@@ -22,18 +56,42 @@ export function FeaturedPressSection({ className }: { className?: string }) {
 
         <div
           className={cn(
-            "mt-8 w-full max-w-[min(100%,1180px)] rounded-2xl sm:mt-10 md:mt-12 md:rounded-3xl",
-            "bg-[#111111]",
-            "px-4 py-7 sm:px-8 sm:py-9 md:px-10 md:py-10 lg:px-12 lg:py-11"
+            "featured-press-bar mt-8 w-full max-w-[min(100%,1180px)] sm:mt-10 md:mt-12",
+            "rounded-2xl md:rounded-3xl bg-[#111111]",
+            "px-4 py-7 sm:px-8 sm:py-9 md:px-6 md:py-10 lg:px-8 lg:py-11"
           )}
         >
-          <ul className="m-0 grid w-full list-none grid-cols-2 items-center justify-items-center gap-x-4 gap-y-7 p-0 sm:gap-x-8 sm:gap-y-8 md:grid-cols-4 md:gap-x-4 md:gap-y-0 lg:gap-x-8">
-            {featuredPressLogos.map((logo) => (
+          <div
+            className="featured-press-mask motion-reduce:hidden"
+            aria-label="Featured press and industry publications"
+          >
+            <div className="featured-press-track">
+              {marqueeLogos.map((logo, index) => (
+                <div
+                  key={`${logo.id}-${index}`}
+                  className="featured-press-item"
+                  style={{ width: logo.width }}
+                >
+                  <SiteImage
+                    alt={logo.name}
+                    className="h-auto max-h-[26px] w-full object-contain object-center opacity-[0.88] sm:max-h-[30px] md:max-h-[32px] lg:max-h-[34px]"
+                    height={logo.height}
+                    sizes="180px"
+                    src={logo.src}
+                    width={logo.width}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <ul className="m-0 hidden w-full list-none grid-cols-2 items-center justify-items-center gap-x-4 gap-y-7 p-0 motion-reduce:grid sm:gap-x-8 sm:gap-y-8 md:grid-cols-4 md:gap-x-4 md:gap-y-0 lg:gap-x-8">
+            {logos.map((logo) => (
               <li
                 key={logo.id}
                 className="flex w-full max-w-[11rem] items-center justify-center sm:max-w-[12.5rem] md:max-w-none"
               >
-                <Image
+                <SiteImage
                   alt={logo.name}
                   className="h-auto w-full max-h-[26px] object-contain object-center opacity-[0.88] sm:max-h-[30px] md:max-h-[32px] lg:max-h-[34px]"
                   height={logo.height}

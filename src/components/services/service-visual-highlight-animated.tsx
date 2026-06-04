@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Image from "next/image";
+import { SiteImage } from "@/components/ui/site-image";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { FadeUp } from "@/components/services/fade-up";
@@ -330,7 +330,7 @@ export function ServiceVisualHighlightAnimated({
   return (
     <section
       className={cn(
-        "relative overflow-hidden bg-black text-white",
+        "relative overflow-x-clip overflow-y-visible bg-black text-white",
         blendWithHero ? "pt-6 pb-16 sm:pt-10 sm:pb-20 md:pt-12 md:pb-24" : "py-14 sm:py-16 md:py-20",
         className
       )}
@@ -344,8 +344,8 @@ export function ServiceVisualHighlightAnimated({
         <FadeUp>
           <div className="relative mx-auto min-h-[min(72vh,840px)] w-full max-w-[min(100%,1320px)] px-3 sm:min-h-[min(78vh,920px)] sm:px-5 lg:px-8">
             {beforeMainColumn}
-            <div className="relative mx-auto flex w-full max-w-[min(100%,720px)] flex-col items-center pt-14 sm:max-w-[min(100%,820px)] sm:pt-20 md:pt-24 lg:pt-28">
-              <FloatingLimeSphere className="-mb-2 sm:-mb-3" reduceMotion={reduceMotion} />
+            <div className="relative mx-auto flex w-full max-w-[min(100%,720px)] flex-col items-center pt-10 sm:max-w-[min(100%,820px)] sm:pt-20 md:pt-24 lg:pt-28">
+              <FloatingLimeSphere className="-mb-6 sm:-mb-3" reduceMotion={reduceMotion} />
 
               <motion.figure
                 className="relative z-[15] w-full"
@@ -353,15 +353,20 @@ export function ServiceVisualHighlightAnimated({
                 transition={reduceMotion ? undefined : { duration: 9, repeat: Infinity, ease: "easeInOut" }}
               >
                 <div className="relative mx-auto w-full bg-transparent">
-                  <div className="relative mx-auto h-[min(68vh,900px)] w-full min-h-[min(52vh,480px)] max-w-full sm:min-h-[min(56vh,540px)] md:h-[min(70vh,940px)]">
-                    <Image
-                      alt={content.imageAlt}
-                      className="object-contain object-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.65)]"
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 100vw, min(820px, 100vw)"
-                      src={content.imageSrc}
-                    />
+                  <div
+                    className="marketing-image-shell relative mx-auto h-[min(58vh,760px)] w-full min-h-[min(46vh,420px)] max-w-full sm:h-[min(68vh,900px)] sm:min-h-[min(56vh,540px)] md:h-[min(70vh,940px)]"
+                  >
+                    <span aria-hidden className="marketing-image-ground" />
+                    <div className="marketing-image-cutout-wrap">
+                      <SiteImage
+                        alt={content.imageAlt}
+                        className="marketing-cutout-img object-contain object-center"
+                        fill
+                        sizes="(max-width: 768px) 100vw, min(820px, 100vw)"
+                        src={content.imageSrc}
+                      />
+                    </div>
+                    <span aria-hidden className="marketing-image-bottom-fade" />
                   </div>
                 </div>
               </motion.figure>

@@ -1,3 +1,5 @@
+import { siteImage } from "@/lib/site-images";
+
 /** Copy for `/about/our-story` — two side-by-side blocks (text + image each). */
 
 export type OurStorySplitBlock = {
@@ -36,7 +38,7 @@ export const ourStoryContent: OurStoryPageContent = {
       "Our mission is simple — empower independent talent with the right tools, opportunities, and industry support to grow, thrive, and build lasting impact worldwide."
     ],
     image: {
-      src: "/OUR STORY.png",
+      src: siteImage("About/Our story", "Built for Independent Artists.png"),
       alt: "Autodhun — our story, independent artists and the music ecosystem"
     }
   },
@@ -48,7 +50,7 @@ export const ourStoryContent: OurStoryPageContent = {
       "We’re here to make a difference in the independent music industry. We ensure that every artist gets the support they need to take their music to new heights."
     ],
     image: {
-      src: "/Our Aim.png",
+      src: siteImage("About/Our story", "Our Aim.png"),
       alt: "Our aim — connecting creativity with success for independent artists"
     }
   }

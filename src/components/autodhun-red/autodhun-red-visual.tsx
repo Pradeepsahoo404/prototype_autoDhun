@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import { autodhunRedImages } from "@/lib/site-images";
+import { SiteImage } from "@/components/ui/site-image";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { FadeUp } from "@/components/services/fade-up";
@@ -20,7 +21,7 @@ function RedAmbientHalo({ reduceMotion }: { reduceMotion: boolean }) {
   } as const;
 
   const baseClass =
-    "pointer-events-none absolute left-1/2 top-1/2 z-0 aspect-square w-[min(120vw,720px)] max-w-full -translate-x-1/2 -translate-y-1/2 opacity-90";
+    "pointer-events-none absolute left-1/2 top-1/2 z-0 aspect-[21/9] w-full max-w-full -translate-x-1/2 -translate-y-1/2 opacity-90";
 
   if (reduceMotion) {
     return <div aria-hidden className={baseClass} style={style} />;
@@ -92,7 +93,7 @@ function RedParticles({ reduceMotion }: { reduceMotion: boolean }) {
   );
 }
 
-/** Promo visual before CTA — same layout pattern as service visual highlights, red theme. */
+/** Wide hero banner under the Autodhun Red intro copy. */
 export function AutodhunRedVisual({ className }: { className?: string }) {
   const reduceMotion = useReducedMotion() ?? false;
 
@@ -108,15 +109,19 @@ export function AutodhunRedVisual({ className }: { className?: string }) {
             animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
             transition={reduceMotion ? undefined : { duration: 9, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="relative mx-auto w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
-              <Image
+            <div
+              className={cn(
+                "relative mx-auto w-full overflow-hidden rounded-xl sm:rounded-2xl",
+                "aspect-[21/9] max-h-[min(48vw,380px)] sm:max-h-[400px]",
+                "drop-shadow-[0_20px_50px_rgba(0,0,0,0.65)]"
+              )}
+            >
+              <SiteImage
                 alt="Autodhun Red — premium membership for artists, labels, and music producers"
-                className="h-auto w-full object-contain object-center"
-                height={900}
-                priority
+                className="object-cover object-center"
+                fill
                 sizes="(max-width: 1320px) 100vw, 1320px"
-                src="/PictureRed.png"
-                width={1600}
+                src={autodhunRedImages.banner}
               />
             </div>
           </motion.figure>

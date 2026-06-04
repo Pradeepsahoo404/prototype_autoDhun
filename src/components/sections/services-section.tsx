@@ -1,6 +1,9 @@
-import Image from "next/image";
+"use client";
+
+import { SiteImage } from "@/components/ui/site-image";
 import type { CSSProperties } from "react";
 
+import { homeServicesFallback } from "@/data/home/home-services";
 import { cn } from "@/lib/utils";
 
 const SERVICE_STROKE_PX = 2;
@@ -17,44 +20,6 @@ type ServiceItem = {
   imageSrc: string;
   imageAlt: string;
 };
-
-const SERVICES: ServiceItem[] = [
-  {
-    title: "Music Distribution",
-    description:
-      "Deliver your releases to major streaming platforms with clean metadata, scheduling, and the operational support labels need to ship on time.",
-    imageSrc: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=85",
-    imageAlt: "Music Distribution",
-  },
-  {
-    title: "Analytics & Worldwide Payouts",
-    description:
-      "Track your music’s performance with daily and monthly reports, detailed revenue insights, trends, and easy-to-understand analytics charts.",
-    imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=85",
-    imageAlt: "Analytics",
-  },
-  {
-    title: "YouTube Content ID & CMS",
-    description:
-      "Claim and manage sound recordings on YouTube with the right channel and rights setup so your catalog can earn where videos use your music.",
-    imageSrc: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=800&q=85",
-    imageAlt: "YouTube Content ID",
-  },
-  {
-    title: "Copyright Protection",
-    description:
-      "Reduce unauthorized use with workflows aligned to your releases—so your team can respond quickly while distribution stays organized.",
-    imageSrc: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=85",
-    imageAlt: "Copyright Protection",
-  },
-  {
-    title: "Dolby Atmos & VEVO",
-    description:
-      "Bring immersive mixes and official videos to supported platforms with delivery paths that match how premium catalogs are expected to look and sound.",
-    imageSrc: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=85",
-    imageAlt: "Dolby Atmos",
-  },
-];
 
 const strokeStyle = {
   ["--svc-s"]: `${SERVICE_STROKE_PX}px`,
@@ -111,6 +76,13 @@ function ServiceTitleStock({ imageOnLeft }: { imageOnLeft: boolean }) {
 }
 
 export function ServicesSection({ className }: { className?: string }) {
+  const services: ServiceItem[] = homeServicesFallback.map((s) => ({
+    title: s.title,
+    description: s.description,
+    imageSrc: s.imageSrc,
+    imageAlt: s.imageAlt
+  }));
+
   return (
     <section
       className={cn(
@@ -124,13 +96,13 @@ export function ServicesSection({ className }: { className?: string }) {
       </div>
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
-        {SERVICES.map((item, index) => {
+        {services.map((item, index) => {
           const isEven = index % 2 === 0;
           const imageOnLeft = isEven;
 
           return (
             <div
-              key={index}
+              key={item.title}
               className={cn(
                 "relative mb-8 flex flex-col items-center gap-5 last:mb-0 sm:mb-10 sm:gap-6 lg:flex-row lg:items-center lg:gap-7 lg:overflow-visible",
                 "overflow-x-clip",
@@ -153,11 +125,10 @@ export function ServicesSection({ className }: { className?: string }) {
                   }
                 >
                   <div className="relative aspect-square w-full overflow-hidden rounded-[calc(1rem-var(--svc-s))] bg-black">
-                    <Image
+                    <SiteImage
                       alt={item.imageAlt}
                       className="object-cover"
                       fill
-                      priority={index < 2}
                       sizes="(max-width: 1024px) 360px, 360px"
                       src={item.imageSrc}
                     />

@@ -3,6 +3,10 @@
  * Update here to change marketing text site-wide.
  */
 
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "services/Music Distribution";
+
 export type MusicDistributionBenefit = {
   id: string;
   title: string;
@@ -31,8 +35,7 @@ export const musicDistributionContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    /** Public asset — filename includes trailing space before `.png`. */
-    imageSrc: "/Music%20Distribution%20.png",
+    imageSrc: siteImage(SECTION, "Music Distribution banner.png"),
     imageAlt:
       "Stylized music distribution hub: a note at the center with streaming and social platform icons on dotted orbits, on black."
   },
@@ -47,7 +50,7 @@ export const musicDistributionContent = {
         description:
           "Distribute your music globally across leading streaming platforms and digital stores while keeping full control of your releases and metadata.",
         /** Same orbit / platform graphic as the hero visual — matches reference “Release your music” tile. */
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Worldwide Music Reach"),
         imageAlt:
           "Streaming and social platform icons on orbital paths around a central music mark."
       },
@@ -56,8 +59,7 @@ export const musicDistributionContent = {
         title: "Fast & Seamless Releases",
         description:
           "Launch tracks on your timeline with a smooth delivery pipeline—from upload to live on stores without unnecessary delays.",
-        /** `public/For Distribution .png` */
-        imageSrc: "/For%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Fast & Seamless Releases"),
         imageAlt: "Distribution workflow illustration from Autodhun brand assets."
       },
       {
@@ -65,8 +67,7 @@ export const musicDistributionContent = {
         title: "Maximized Revenue Opportunities",
         description:
           "Monetize your music across multiple platforms and audiences worldwide.",
-        /** `public/Artist Funding  .png` */
-        imageSrc: "/Artist%20Funding%20%20.png",
+        imageSrc: benefitImage(SECTION, "Maximized Revenue Opportunities"),
         imageAlt: "Artist funding and revenue illustration from Autodhun brand assets."
       },
       {
@@ -74,8 +75,7 @@ export const musicDistributionContent = {
         title: "Complete Catalog Management",
         description:
           "Manage releases, metadata, and music assets from one centralized platform.",
-        /** `public/Publishing  Administration.png` */
-        imageSrc: "/Publishing%20%20Administration.png",
+        imageSrc: benefitImage(SECTION, "Complete Catalog Management"),
         imageAlt: "Publishing and rights administration illustration from Autodhun brand assets."
       },
       // {

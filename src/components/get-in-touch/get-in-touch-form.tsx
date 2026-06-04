@@ -2,33 +2,45 @@
 
 import { type FormEvent, useCallback, useState } from "react";
 
+import { useSubmitContactMutation } from "@/store/api/autodhunApi";
+
 const cardClass = "contact-form-tile tile-elevation-general w-full min-w-0";
 
 export function GetInTouchForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [submitContact] = useSubmitContactMutation();
 
-  const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get("Name") ?? "").trim();
-    const email = String(data.get("Email") ?? "").trim();
-    const phone = String(data.get("Phone") ?? "").trim();
-    const message = String(data.get("Message") ?? "").trim();
-    if (!name || !email || !phone || !message) {
-      setStatus("error");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus("error");
-      return;
-    }
-    setStatus("sending");
-    window.setTimeout(() => {
-      setStatus("sent");
-      form.reset();
-    }, 450);
-  }, []);
+  const onSubmit = useCallback(
+    async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = new FormData(form);
+      const name = String(data.get("Name") ?? "").trim();
+      const email = String(data.get("Email") ?? "").trim();
+      const phone = String(data.get("Phone") ?? "").trim();
+      const message = String(data.get("Message") ?? "").trim();
+      if (!name || !email || !phone || !message) {
+        setStatus("error");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setStatus("error");
+        return;
+      }
+      setStatus("sending");
+      try {
+        const result = await submitContact({ name, email, phone, message }).unwrap();
+        setStatus("sent");
+        form.reset();
+        if (!result.emailSent) {
+          console.warn("Contact saved but notification email was not sent (check SMTP settings).");
+        }
+      } catch {
+        setStatus("error");
+      }
+    },
+    [submitContact]
+  );
 
   const onFieldChange = useCallback(() => {
     if (status === "error") {

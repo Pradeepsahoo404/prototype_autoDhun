@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "services/YouTube Content ID";
+
 export type YoutubeContentIdOacCmsBenefit = {
   id: string;
   title: string;
@@ -42,8 +46,7 @@ export const youtubeContentIdOacCmsContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    /** `public/YouTube Content ID, OAC & CMS  .png` */
-    imageSrc: "/YouTube%20Content%20ID%2C%20OAC%20%26%20CMS%20%20.png",
+    imageSrc: siteImage(SECTION, "YouTube Content ID banner.png"),
     imageAlt:
       "YouTube play button at the center connected to protection, analytics, global reach, and audience icons."
   },
@@ -56,7 +59,7 @@ export const youtubeContentIdOacCmsContent = {
         title: "Automatic Content Monetization",
         description:
           "Earn revenue from eligible videos using your music through YouTube Content ID claims.",
-        imageSrc: "/YouTube%20Content%20ID%2C%20OAC%20%26%20CMS%20%20.png",
+        imageSrc: benefitImage(SECTION, "Automatic Content Monetization"),
         imageAlt: "YouTube Content ID and connected service icons."
       },
       {
@@ -64,7 +67,7 @@ export const youtubeContentIdOacCmsContent = {
         title: "Official Artist Channel Verification",
         description:
           "Strengthen your artist identity with a verified Official Artist Channel (OAC).",
-        imageSrc: "/For%20Artist%20%20.png",
+        imageSrc: benefitImage(SECTION, "Official Artist Channel Verification"),
         imageAlt: "For artists brand illustration."
       },
       {
@@ -72,7 +75,7 @@ export const youtubeContentIdOacCmsContent = {
         title: "Advanced Rights Management",
         description:
           "Manage assets, claims, copyrights, and monetization efficiently with CMS access.",
-        imageSrc: "/Copyright%20Protection%20%20.png",
+        imageSrc: benefitImage(SECTION, "Advanced Rights Management"),
         imageAlt: "Copyright protection illustration."
       },
       {
@@ -80,7 +83,7 @@ export const youtubeContentIdOacCmsContent = {
         title: "Improved Visibility & Brand Presence",
         description:
           "Boost discoverability and create a professional YouTube presence for your audience.",
-        imageSrc: "/Music%20Marketing%20.png",
+        imageSrc: benefitImage(SECTION, "Improved Visibility & Brand Presence"),
         imageAlt: "Music marketing illustration."
       }
     ] satisfies YoutubeContentIdOacCmsBenefit[]

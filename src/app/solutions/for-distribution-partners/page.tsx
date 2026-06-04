@@ -17,7 +17,7 @@ export default function ForDistributionPartnersPage() {
   const { hero, visual, benefits } = forDistributionPartnersContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <ForDistributionPartnersHero content={hero} />
       <ServiceVisualHighlightAnimated content={visual} />
       <ForDistributionPartnersBenefitsSection content={benefits} hideTopRule />

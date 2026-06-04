@@ -91,7 +91,6 @@ export function OurStorySplit({ content }: { content: OurStoryPageContent }) {
         <LeadImageCard
           alt={ourStory.image.alt}
           className="mx-auto max-w-lg sm:max-w-none lg:mx-0"
-          priority
           reduceMotion={!!reduceMotion}
           sizes="(max-width: 1024px) 100vw, 50vw"
           slideFrom="right"

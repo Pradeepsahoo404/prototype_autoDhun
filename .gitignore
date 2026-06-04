@@ -21,6 +21,9 @@ yarn-error.log*
 pnpm-debug.log*
 dev-server*.log
 
+# large media (host via CDN / deploy separately — GitHub limit 100MB)
+public/videos/*.mp4
+
 # os / editor
 .DS_Store
 Thumbs.db

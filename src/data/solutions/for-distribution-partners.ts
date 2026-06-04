@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Solutions/For Distribution Partners";
+
 export type ForDistributionPartnersBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const forDistributionPartnersContent = {
   },
   visual: {
     /** `public/For Distribution .png` */
-    imageSrc: "/For%20Distribution%20.png",
+    imageSrc: siteImage(SECTION, "FOR DISTRIBUTION PARTNERS banner.png"),
     imageAlt:
       "Distribution hub graphic: central music mark with streaming platform nodes and global reach, on black."
   },
@@ -56,7 +60,7 @@ export const forDistributionPartnersContent = {
         title: "Scalable Distribution Infrastructure",
         description:
           "Manage and distribute music efficiently from a single label to thousands of artists and catalogs.",
-        imageSrc: "/Music%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Scalable Distribution Infrastructure"),
         imageAlt: "Music distribution hub with platforms on orbital paths."
       },
       {
@@ -64,7 +68,7 @@ export const forDistributionPartnersContent = {
         title: "Global Platform Reach",
         description:
           "Deliver music worldwide across leading streaming platforms and digital stores seamlessly.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Global Platform Reach"),
         imageAlt: "Analytics and worldwide reach illustration."
       },
       {
@@ -72,7 +76,7 @@ export const forDistributionPartnersContent = {
         title: "Automated Workflow Management",
         description:
           "Simplify releases, metadata handling, reporting, and royalty operations with smart automation.",
-        imageSrc: "/Marketing%20Tools.png",
+        imageSrc: benefitImage(SECTION, "Automated Workflow Management"),
         imageAlt: "Marketing and workflow tools illustration."
       },
       {
@@ -80,7 +84,7 @@ export const forDistributionPartnersContent = {
         title: "Integrated Rights & Revenue Management",
         description:
           "Control content ownership, royalty splits, payouts, and monetization from one centralized platform.",
-        imageSrc: "/Publishing%20%20Administration.png",
+        imageSrc: benefitImage(SECTION, "Integrated Rights & Revenue Management"),
         imageAlt: "Publishing and rights administration illustration."
       }
     ] satisfies ForDistributionPartnersBenefit[]

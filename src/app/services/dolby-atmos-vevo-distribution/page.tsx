@@ -17,7 +17,7 @@ export default function DolbyAtmosVevoDistributionPage() {
   const { hero, visual, benefits } = dolbyAtmosVevoDistributionContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <DolbyAtmosVevoDistributionHero content={hero} />
       <DolbyAtmosVevoDistributionVisualHighlight content={visual} />
       <DolbyAtmosVevoDistributionBenefitsSection content={benefits} hideTopRule />

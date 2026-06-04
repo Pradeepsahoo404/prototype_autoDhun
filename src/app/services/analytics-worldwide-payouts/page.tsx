@@ -17,7 +17,7 @@ export default function AnalyticsWorldwidePayoutsPage() {
   const { hero, visual, benefits } = analyticsWorldwidePayoutsContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <AnalyticsWorldwidePayoutsHero content={hero} />
       <AnalyticsWorldwidePayoutsVisualHighlight content={visual} />
       <AnalyticsWorldwidePayoutsBenefitsSection content={benefits} hideTopRule />

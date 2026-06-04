@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "services/Copyright Protection";
+
 export type CopyrightProtectionBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const copyrightProtectionContent = {
   },
   visual: {
     /** `public/Copyright Protection  .png` */
-    imageSrc: "/Copyright%20Protection%20%20.png",
+    imageSrc: siteImage(SECTION, "Copyright protection banner.png"),
     imageAlt:
       "Infographic: intellectual property keys for trademark, copyright, and IP overview."
   },
@@ -56,7 +60,7 @@ export const copyrightProtectionContent = {
         title: "Advanced Content Protection",
         description:
           "Detect and prevent unauthorized use of your music and digital assets across major platforms.",
-        imageSrc: "/Copyright%20Protection%20%20.png",
+        imageSrc: benefitImage(SECTION, "Advanced Content Protection"),
         imageAlt: "Copyright and intellectual property protection illustration."
       },
       {
@@ -64,7 +68,7 @@ export const copyrightProtectionContent = {
         title: "Automated Rights Management",
         description:
           "Simplify copyright claims, monitoring, and enforcement with smart automated systems.",
-        imageSrc: "/Publishing%20%20Administration.png",
+        imageSrc: benefitImage(SECTION, "Automated Rights Management"),
         imageAlt: "Publishing and rights administration illustration."
       },
       {
@@ -72,7 +76,7 @@ export const copyrightProtectionContent = {
         title: "Transparent Reporting & Claim Tracking",
         description:
           "Gain complete visibility into content usage, claims, and earnings with accurate reporting tools.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "Transparent Reporting & Claim Tracking"),
         imageAlt: "Analytics and reporting illustration."
       },
       {
@@ -80,7 +84,7 @@ export const copyrightProtectionContent = {
         title: "Full Ownership & Brand Control",
         description:
           "Maintain control over your intellectual property while strengthening your artist or label identity worldwide.",
-        imageSrc: "/For%20Labels.png",
+        imageSrc: benefitImage(SECTION, "Full Ownership & Brand Control"),
         imageAlt: "For labels brand illustration."
       }
     ] satisfies CopyrightProtectionBenefit[]

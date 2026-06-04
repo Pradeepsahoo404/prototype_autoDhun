@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Growth/Artist Funding";
+
 export type GrowthArtistFundingBenefit = {
   id: string;
   title: string;
@@ -43,7 +47,7 @@ export const growthArtistFundingContent = {
   },
   visual: {
     /** `public/Artist Funding  .png` */
-    imageSrc: "/Artist%20Funding%20%20.png",
+    imageSrc: siteImage(SECTION, "Artist Funding banner.png"),
     imageAlt:
       "Artist funding infographic: financial support, grants, collaborations, crowdfunding, and community around a creator at work."
   },
@@ -56,7 +60,7 @@ export const growthArtistFundingContent = {
         title: "Financial Support for Music Projects",
         description:
           "Access funding for recording, production, music videos, promotions, and live performances.",
-        imageSrc: "/Marketing%20Tools.png",
+        imageSrc: benefitImage(SECTION, "Financial Support for Music Projects"),
         imageAlt: "Marketing and business partnership illustration."
       },
       {
@@ -64,7 +68,7 @@ export const growthArtistFundingContent = {
         title: "Accelerated Career Growth",
         description:
           "Scale your music career faster with resources designed to support long-term artist development.",
-        imageSrc: "/Future.png",
+        imageSrc: benefitImage(SECTION, "Accelerated Career Growth"),
         imageAlt: "Career growth and future illustration."
       },
       {
@@ -72,7 +76,7 @@ export const growthArtistFundingContent = {
         title: "Marketing & Promotion Assistance",
         description:
           "Boost visibility with funded marketing campaigns, playlist promotion, and digital advertising support.",
-        imageSrc: "/Music%20Marketing%20.png",
+        imageSrc: benefitImage(SECTION, "Marketing & Promotion Assistance"),
         imageAlt: "Music marketing illustration."
       },
       {
@@ -80,7 +84,7 @@ export const growthArtistFundingContent = {
         title: "Independent Creative Freedom",
         description:
           "Receive financial backing while maintaining full ownership and creative control over your music.",
-        imageSrc: "/Copyright%20Protection%20%20.png",
+        imageSrc: benefitImage(SECTION, "Independent Creative Freedom"),
         imageAlt: "Rights and creative control illustration."
       }
     ] satisfies GrowthArtistFundingBenefit[]

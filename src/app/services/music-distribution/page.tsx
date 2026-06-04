@@ -17,7 +17,7 @@ export default function MusicDistributionPage() {
   const { hero, visual, benefits } = musicDistributionContent;
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-x-clip bg-black">
       <HeroService content={hero} />
       <MusicDistributionVisualHighlight content={visual} />
       <MusicDistributionBenefitsSection content={benefits} hideTopRule />

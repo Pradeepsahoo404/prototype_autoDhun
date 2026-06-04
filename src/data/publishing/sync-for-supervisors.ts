@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "Publishing/Sync for Supervisors";
+
 export type PublishingSyncForSupervisorsBenefit = {
   id: string;
   title: string;
@@ -42,7 +46,7 @@ export const publishingSyncForSupervisorsContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    imageSrc: "/Sync%20For%20Supervisors.png",
+    imageSrc: siteImage(SECTION, "Sync for Supervisors banner.png"),
     imageAlt:
       "Sync for supervisors infographic: music licensing for film, TV, ads, and games with discovery, clearance, and workflow callouts."
   },
@@ -55,7 +59,7 @@ export const publishingSyncForSupervisorsContent = {
         title: "Premium Sync Opportunities",
         description:
           "Get your music placed in films, TV shows, commercials, games, OTT platforms, and digital campaigns.",
-        imageSrc: "/syncArtict.png",
+        imageSrc: benefitImage(SECTION, "Premium Sync Opportunities"),
         imageAlt: "Sync and visual media opportunities illustration."
       },
       {
@@ -63,7 +67,7 @@ export const publishingSyncForSupervisorsContent = {
         title: "Global Creative Network",
         description:
           "Connect with filmmakers, brands, agencies, production houses, and content creators worldwide.",
-        imageSrc: "/Purpose.png",
+        imageSrc: benefitImage(SECTION, "Global Creative Network"),
         imageAlt: "Creative partnership and purpose illustration."
       },
       {
@@ -71,7 +75,7 @@ export const publishingSyncForSupervisorsContent = {
         title: "New Revenue Streams",
         description:
           "Generate additional income through sync licensing deals, royalties, and media placements.",
-        imageSrc: "/Analytics%20%26%20Worldwide%20Payouts%20.png",
+        imageSrc: benefitImage(SECTION, "New Revenue Streams"),
         imageAlt: "Revenue and payouts illustration."
       },
       {
@@ -79,7 +83,7 @@ export const publishingSyncForSupervisorsContent = {
         title: "Increased Artist Exposure",
         description:
           "Reach new audiences and boost your visibility through high-profile content integrations.",
-        imageSrc: "/Music%20Marketing%20.png",
+        imageSrc: benefitImage(SECTION, "Increased Artist Exposure"),
         imageAlt: "Marketing and visibility illustration."
       }
     ] satisfies PublishingSyncForSupervisorsBenefit[]

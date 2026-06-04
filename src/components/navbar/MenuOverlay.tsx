@@ -202,7 +202,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
       animate={{ opacity: 1, x: 0, y: 0 }}
       aria-label="Site navigation"
       aria-modal="true"
-      className="relative z-[52] flex min-h-0 w-full flex-1 flex-col overflow-x-hidden overflow-y-auto bg-black lg:absolute lg:left-0 lg:top-[var(--site-header-height)] lg:h-[calc(100svh-var(--site-header-height))] lg:max-h-[calc(100svh-var(--site-header-height))] lg:w-[100vw] lg:overflow-x-hidden lg:overflow-y-hidden"
+      className="relative z-[52] flex min-h-0 w-full flex-1 flex-col overflow-x-hidden overflow-y-auto bg-black lg:absolute lg:inset-x-0 lg:top-[var(--site-header-height)] lg:bottom-0 lg:h-auto lg:max-h-none lg:w-full lg:overflow-hidden"
       exit={{ opacity: 0, x: reduceMotion ? 0 : -28, y: reduceMotion ? 0 : -14 }}
       id={id}
       initial={{ opacity: 0, x: reduceMotion ? 0 : -32, y: reduceMotion ? 0 : -18 }}
@@ -221,7 +221,7 @@ export function MenuOverlay({ id, onClose, onNavigate }: MenuOverlayProps) {
       <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:h-full lg:min-h-0 lg:max-h-full lg:flex-1 lg:overflow-hidden">
         <div className="relative flex min-h-0 flex-1 flex-col lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden">
           {/* Hero: full viewport behind menu; Virgin-style diagonal revealed by white clipped panel */}
-          <div className="relative z-0 order-2 min-h-[min(48vh,380px)] flex-1 lg:absolute lg:inset-0 lg:order-1 lg:z-0 lg:min-h-0">
+          <div className="relative z-0 order-2 min-h-[min(48vh,380px)] flex-1 lg:absolute lg:inset-0 lg:order-1 lg:z-0 lg:min-h-0 lg:w-full">
             <PreviewPanel active={activePreview} fullBleed />
           </div>
 

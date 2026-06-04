@@ -1,3 +1,7 @@
+import { benefitImage, siteImage } from "@/lib/site-images";
+
+const SECTION = "services/Dolby Atmos & VEVO Distribution";
+
 export type DolbyAtmosVevoDistributionBenefit = {
   id: string;
   title: string;
@@ -42,8 +46,7 @@ export const dolbyAtmosVevoDistributionContent = {
     secondaryCta: { label: "View Pricing", href: "/services" }
   },
   visual: {
-    /** `public/Dolby Atmos & VEVO Distribution .png` */
-    imageSrc: "/Dolby%20Atmos%20%26%20VEVO%20Distribution%20.png",
+    imageSrc: siteImage(SECTION, "dolby-atmos-vevo-distribution banner.png"),
     imageAlt: "Dolby Atmos promotional artwork with profile and logo on black."
   },
   benefits: {
@@ -55,7 +58,7 @@ export const dolbyAtmosVevoDistributionContent = {
         title: "Immersive Audio Experience",
         description:
           "Deliver studio-quality Dolby Atmos sound with enhanced depth, clarity, and spatial audio.",
-        imageSrc: "/Dolby%20Atmos%20%26%20VEVO%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Immersive Audio Experience"),
         imageAlt: "Dolby Atmos and spatial audio branding."
       },
       {
@@ -63,7 +66,7 @@ export const dolbyAtmosVevoDistributionContent = {
         title: "Professional VEVO Video Distribution",
         description:
           "Showcase your music videos on premium VEVO channels for stronger brand visibility.",
-        imageSrc: "/Music%20Marketing%20.png",
+        imageSrc: benefitImage(SECTION, "Professional VEVO Video Distribution"),
         imageAlt: "Music marketing and video presence illustration."
       },
       {
@@ -71,7 +74,7 @@ export const dolbyAtmosVevoDistributionContent = {
         title: "Global Platform Reach",
         description:
           "Distribute high-quality audio and video content across leading streaming and entertainment platforms worldwide.",
-        imageSrc: "/For%20Distribution%20.png",
+        imageSrc: benefitImage(SECTION, "Global Platform Reach"),
         imageAlt: "Distribution illustration."
       },
       {
@@ -79,7 +82,7 @@ export const dolbyAtmosVevoDistributionContent = {
         title: "Enhanced Artist Branding",
         description:
           "Build a premium artist identity with cinematic sound experiences and professional video presence.",
-        imageSrc: "/For%20Artist%20%20.png",
+        imageSrc: benefitImage(SECTION, "Enhanced Artist Branding"),
         imageAlt: "For artists illustration."
       }
     ] satisfies DolbyAtmosVevoDistributionBenefit[]
