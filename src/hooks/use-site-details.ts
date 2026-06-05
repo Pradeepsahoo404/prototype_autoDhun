@@ -6,11 +6,11 @@ import type { SiteDetailsDto } from "@/types/api";
 
 export const FALLBACK_SITE_DETAILS: SiteDetailsDto = {
   brandName: "Autodhun",
-  logoUrl: "/autodhun-logo.png",
-  email: "admin@autodhundigital.in",
+  logoUrl: "/Autodhun_logo_white_n_green_1388x250.png",
+  email: "help@autodhun.com",
   phone: "9135555656",
-  addressLine1: "New Sarpanch Colony",
-  addressLine2: "Jamalpur, Ludhiana — 141010"
+  addressLine1: "Near Haria Industrial Compound",
+  addressLine2: "Majiwada, Thane(W) - 400 601"
 };
 
 export function useSiteDetails() {

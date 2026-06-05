@@ -93,7 +93,6 @@ export function AutodhunRedStageSplit() {
                 variant="ghost"
               >
                 BECOME A MEMBER
-                <ArrowRight aria-hidden="true" className="ml-2 size-4 shrink-0 sm:size-5" />
               </LinkButton>
             </motion.div>
           </motion.div>
